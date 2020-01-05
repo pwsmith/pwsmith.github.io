@@ -1,0 +1,100 @@
+/* COMMON ELEMENTS */
+
+body {
+    counter-reset: example-counter 0;
+    }
+
+.ex::before {
+    counter-increment: example-counter;
+    content:"(" counter(example-counter) ") ";
+  }
+
+.ab::before {
+    counter-increment: ab-counter;
+    content: counter(ab-counter, lower-latin) ".";
+  }
+
+  .example-number {
+    width: 2em;
+  }
+
+  .ab-counter {
+    width: 2em;
+  }
+
+  .judgement {
+    text-align: right;
+    width: .5em;
+    padding-right: 0.5em;
+  }
+
+  .smallcaps {
+    font-variant: small-caps;
+  }
+  
+/* SINGLE LINE EXAMPLES */
+
+.example-container {
+  counter-reset: ab-counter 0;
+  line-height: 0.3;
+}
+
+.individual-example {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+/* GLOSSED EXAMPLES */
+
+.gloss-example-container {
+  counter-reset: ab-counter 0;
+}
+
+.gloss-individual-example {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-bottom: -1em;
+  }
+
+ .gloss-example {
+   overflow:auto;
+   width: 90%;
+   margin-left: -2.5em;
+  }
+
+  .gloss-individual-word {
+    margin-top: -0em;
+  }
+  /* set the value of margin-top in gloss-inidividual-word if the line appears too low in the glossed examples. This is a problem that I have found when using css files on Arch based linux systems (Arch and Manjaro), not tested on others. */
+
+ ol.sentence {
+    display:flex;
+    list-style-type: none;
+    padding: 0em;
+    padding-top: -2em;
+    }
+
+ .target-word {
+     list-style-type: none;
+  }
+
+
+  .target-gloss {
+     list-style-type: none;
+  }
+
+  ol.word {
+   margin-bottom: .5em;
+   float:left;
+   display: inline-block;
+  }
+
+  p.translation {
+    width: 90%;
+    float: left;
+    display: inline-block;
+    margin-top: -1em;
+    margin-left: 3.5em;
+  }

@@ -1,0 +1,18 @@
+I"(<p>Over some weeks in the last semester, I taught a tutorial on how to use LaTeX most effectively for the students in the Graduiertenkolleg in Frankfurt, for when they are writing their PhDs.
+The slides that I used can be found <a href="https://pwsmith.github.io/reveal.js/index.html">here</a>.</p>
+
+<p>The classes looked at the following:</p>
+<ul>
+  <li>Selecting and using a good text editor.</li>
+  <li>How to set Atom up for LaTeX (which we used as an exemplar of a good text editor).</li>
+  <li>Writing snippets in Atom.</li>
+  <li>How and why to use linguistic symbols in Unicode (rather than tipa).</li>
+  <li>LaTeX document structure for a thesis.</li>
+  <li>How to install and use git and Gitkraken.</li>
+  <li><em>Why</em> to use git for a PhD.</li>
+</ul>
+
+<p>Thanks to all the participants in the classes: I enjoyed teaching them a lot, and hope to get the chance to do something similar in the future.
+The classes stemmed from the article <a href="/2019/08/25/what-I-wish-I-knew-when-starting-my-PhD/">What I wish I knew when starting my PhD</a>.</p>
+
+:ET

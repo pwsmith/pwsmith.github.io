@@ -1,23 +1,20 @@
 <div class="contact wow fadeInUp">
   <ul class="contact__list list-reset">
-    {% if site.twitter %}
-      <li class="contact__item"><a href="{{ site.twitter }}" class="contact__link"><i class="ion ion-logo-twitter"></i></a></li>
+    {% if site.email %}
+      <li class="contact__item"><a href="{{ site.email }}" class="contact__link"><ion-icon name="mail"></ion-icon></a></li>
     {% else %} {% endif %}
 
-    {% if site.facebook %}
-      <li class="contact__item"><a href="{{ site.facebook }}" class="contact__link"><i class="ion ion-logo-facebook"></i></a></li>
+    {% if site.github %}
+      <li class="contact__item"><a href="{{ site.github }}" class="contact__link"><ion-icon name="logo-github"></ion-icon></a></li>
     {% else %} {% endif %}
   
-    {% if site.dribbble %}
-      <li class="contact__item"><a href="{{ site.dribbble }}" class="contact__link"><i class="ion ion-logo-dribbble"></i></a></li>
+    {% if site.linkedin %}
+      <li class="contact__item"><a href="{{ site.linkedin }}" class="contact__link"><ion-icon name="logo-linkedin"></ion-icon></a></li>
     {% else %} {% endif %}
   
-    {% if site.instagram %}
-      <li class="contact__item"><a href="{{ site.instagram }}" class="contact__link"><i class="ion ion-logo-instagram"></i></a></li>
+    {% if site.google %}
+      <li class="contact__item"><a href="{{ site.google }}" class="contact__link"><ion-icon name="logo-google"></ion-icon></a></li>
     {% else %} {% endif %}
   
-    {% if site.pinterest %}
-      <li class="contact__item"><a href="{{ site.pinterest }}" class="contact__link"><i class="ion ion-logo-pinterest"></i></a></li>
-    {% else %} {% endif %}
   </ul>
 </div>

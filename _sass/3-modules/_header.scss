@@ -44,6 +44,7 @@
   line-height: 50px;
   font-weight: 700;
   text-decoration: none;
+  color: #212121;
   &:hover {
     color: #000;
   }
@@ -71,6 +72,7 @@
       padding: 5px 10px;
       font-size: 14px;
       transition: all .3s ease;
+      color: #212121;
 
       &:hover {
         color: #fff;
@@ -147,6 +149,7 @@
       .nav__item {
         display: block;
         margin-right: 0;
+        color: #212121
       }
   
       .nav__link {
