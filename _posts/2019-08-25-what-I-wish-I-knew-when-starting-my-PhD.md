@@ -7,7 +7,7 @@
 ---
 
 *So, so, many things*.
-But, I mean things I wish I knew from a *techincal* standpoint, not just things about academia and/or life in general.
+But, I mean things I wish I knew from a *technical* standpoint, not just things about academia and/or life in general.
 The way I handled paper writing and research in the early days of was vastly different from how I do it now.
 If I had started off this way, it would have saved a lot of time in the long run.
 It's true and to be expected that everyone's work flow evolves over time, but the basic set up one uses has a big influence on how you write, and the amount of time spent doing tasks related to that.
@@ -78,7 +78,7 @@ For instance, [Emacs](https://www.gnu.org/software/emacs/), Atom (https://atom.i
 There's also Microsoft's [Visual Studio Code](https://code.visualstudio.com/), which is also fantastic, though I find slightly less suited to LaTeX than Atom or Sublime.
 All offer bibliography integration directly so you can search for citations in your bibliography file without leaving the program, useful if you know the name of the author of the source, but can't remember the full citation key:
 
-![/assets/images/atom_biblio.png](/assets/images/atom_biblio.png)
+![/assets/img/atom_biblio.png](/assets/img/atom_biblio.png)
 
 They also offer a range of syntax highlighting options and automatic indentation to make your text easier to read in the source file
 Finally, they offer the ability to define your own keybindings and snippets.
@@ -137,7 +137,7 @@ To do this, you need a good text editor, which allows you to enter unicode chara
 Emacs does this natively with the sequnce `ctrl+x 8 RET`.
 With both Atom and Sublime, you can download the excellent package Character Table ([Atom](https://atom.io/packages/character-table)) ([Sublime](https://packagecontrol.io/packages/Character%20Table)), which allows you to search by either unicode combination or by character name:
 
-![unicode search in atom](/assets/images/unicode_search.png)
+![unicode search in atom](/assets/img/unicode_search.png)
 
 Using unicode symbols also requires you to use XeLaTeX (or at least, not pdflatex) so that the characters can be recognised.
 You also need to use a font that outputs the characters, like [Libertine](http://libertine-fonts.org/), or the SIL fonts like [Doulos](https://software.sil.org/doulos/) or [Charis](https://software.sil.org/charis/).[^fonts]

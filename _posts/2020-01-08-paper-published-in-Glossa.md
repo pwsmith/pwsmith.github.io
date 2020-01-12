@@ -1,0 +1,15 @@
+---
+layout: post
+title: Paper published in Glossa
+date: 2020-01-08
+image: images/papers.jpg
+tags: [publications, dagbani, open-access]
+---
+
+I'm happy to say that a paper I co-wrote with Sam Issah (Univeristy of Education, Wineba), *Subject and non-subject ex-situ focus in Dagbani*, has been published in Glossa.
+The paper discussed focus marking in Dagbani, and how locally moved subjects that are focussed come to be marked morphologically different to other arguments under focus.
+It's available open access [here](https://www.glossa-journal.org/articles/10.5334/gjgl.664/).
+
+## Abstract
+
+This paper offers a description and account of the patterns of ex-situ focus in Dagbani. We show that there are two syntactic strategies for creating ex-situ focus in the language, one involving A’-movement to the left periphery, and the second involving base generation in the left periphery combined with coreference to a resumptive pronoun. Furthermore, we argue that subjects are difficult to move from Spec,TP to Spec,CP in the left-periphery because of anti-locality, which creates a tension when trying to focus subjects, which are required to derivationally fill the specifier of both positions. We further show that what looks to be a two-way distinction between the behaviour of subjects and non-subjects in the language is in fact a three-way distinction between subjects that are focussed to a local left-periphery, subjects that are focussed to a non-local left-periphery, and non-subjects. These distinctions arise due to there being two methods for Dagbani to resolve the antilocality problem of subject movement, and so local subjects solve the problem differently to non-local subjects.

@@ -1,8 +1,11 @@
 ---
 layout: post
 date: 2019-12-20
+image: images/html.jpg
 tags: [revealjs, html, css, open-source]
 ---
+
+# HTMLEX
 
 In the last semester I have been putting my teaching slides together using [reveal.js](https://github.com/hakimel/reveal.js/), rather than beamer as I usually would. 
 Reveal.js is a javascript library for creating slide decks, where the slides are written in html format and styled with css and javascript.
