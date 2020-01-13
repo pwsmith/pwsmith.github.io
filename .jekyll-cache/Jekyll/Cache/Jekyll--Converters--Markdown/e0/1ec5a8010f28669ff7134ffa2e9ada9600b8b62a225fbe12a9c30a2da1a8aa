@@ -1,4 +1,6 @@
-I"ä<p>In the last semester I have been putting my teaching slides together using <a href="https://github.com/hakimel/reveal.js/">reveal.js</a>, rather than beamer as I usually would. 
+I"<h1 id="htmlex">HTMLEX</h1>
+
+<p>In the last semester I have been putting my teaching slides together using <a href="https://github.com/hakimel/reveal.js/">reveal.js</a>, rather than beamer as I usually would. 
 Reveal.js is a javascript library for creating slide decks, where the slides are written in html format and styled with css and javascript.
 Overall itâ€™s been a good experience, and I like using thi software. 
 I will shortly post some articles about using reveal.js for making linguistics slides, but before that, I want to share a small part of it.</p>
