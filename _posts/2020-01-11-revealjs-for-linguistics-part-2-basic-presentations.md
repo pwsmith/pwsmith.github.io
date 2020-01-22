@@ -1,7 +1,7 @@
 ---
   layout: post
   title: Reveal.js for linguistics Part II - Creating a basic slideshow
-  date: 2020-01-25s
+  date: 2020-01-30
   image: images/presentations.jpg
   tags: [revealjs, study, presentations, how-to]
 ---
