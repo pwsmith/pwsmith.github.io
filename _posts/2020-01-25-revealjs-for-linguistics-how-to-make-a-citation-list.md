@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Reveal.js for Linguistics - how to make a fully formatted citation list
-date: 2020-01-14
+date: 2020-01-30
 image: images/presentations.jpg
 tags: [revealjs, presentation, latex, guides, pandoc]
 ---
