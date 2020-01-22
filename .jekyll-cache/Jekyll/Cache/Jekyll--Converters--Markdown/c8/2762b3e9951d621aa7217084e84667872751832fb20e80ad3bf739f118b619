@@ -1,0 +1,387 @@
+I"�}<p>This post is the first in a series that will outline how to use reveal.js to make slide shows for lingusitics talks. 
+A lot of information is relevant for other academic disciplines as well.
+I do apologise to linguists who are not syntacticians or morphologists for not addressing area-specific requirements (OT-tableaux, for instance).</p>
+
+<h2 id="what-is-revealjs">What is reveal.js</h2>
+
+<p>There are many options to create slide decks, each with their own benefits and drawbacks.
+By far the most popular, and the ones overwhelmingly seen during talks, are dedicated slideshow software such as <a href="https://products.office.com/en-us/powerpoint">Microsoft Powerpoint</a> or <a href="https://www.apple.com/keynote/">Keynote</a> from Apple, or slides created through LaTeX using <a href="https://en.wikipedia.org/wiki/Beamer_(LaTeX)">Beamer</a>.
+Other options such as <a href="https://prezi.com/">Prezi</a> will also output slides.</p>
+
+<p><a href="https://github.com/hakimel/reveal.js/">Reveal.js</a> is a javascript library that creates a slide deck by writing in html.
+That means that the source code is plain text, and all it needs is a browser to run.
+Therefore, they are independent from a particular operating system (unlike powerpoint and keynote).<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup></p>
+
+<h2 id="so-its-like-beamer">So, it’s like beamer?</h2>
+
+<p>At a certain level, the two are similar: they have in common that the source files are both written in plain text, are not OS-specific, and do not require specific software to run (that is, both LaTeX and Javascript have wider, more general uses than just making slides).
+A difference between them beamer presentation will be run through LaTeX to create a pdf file, whereas a reveal.js presentation is rendered as a webpage.
+The <em>key</em> difference between them is that beamer files are <em>static</em>, as pdf files, whereas reveal.js slides can be <em>interactive</em>, as they are effectively a web page.
+Any interactive web content can therefore be used.
+The benefit here is that media can be directly played (videos, sound clips) and that diagrammes can be created that are interactive.
+Furthermore, animations on slide transitions can be used, as well as a host of other things, see the <a href="https://revealjs.com/#/">live demo</a> for example, as well as <a href="https://github.com/hakimel/reveal.js/wiki/Example-Presentations">other example presentations</a>.</p>
+
+<p>To give an example: suppose that you have done work with a typological component to it and you would want to put a map into your presentation showing the number and distribution of languages that you did.
+It is no problem to do this with beamer: you make an image like the following and put it in the slides as an image:</p>
+
+<p><img src="/assets/img/static_map.png" alt="static map" />
+<em>A static map: Useful for showing raw numbers as distribution, but impossible to get much further data from.</em></p>
+
+<p>The problem with this is that it is fixed: you can’t zoom in on the scale, hover over any dots find out which language is represented by which dot etc.
+With reveal.js, it is possible to make maps like the excellent ones they have at <a href="https://wals.info">WALS</a> and use them in your presentation, using relatively simply javascript such as <a href="https://leafletjs.com/">Leaflet</a>, which is easy to use.
+<a href="https://pwsmith88.gitlab.io/reveal/quandt_brussels.html#/3/3">I did this recently</a> and the result is good. 
+It took a short while to figure out the code for the maps, but it’s easy to do once you get it going, and, whilst I know some, I don’t have a very high level of javascript knowledge.
+In addition to showing the audience the raw number of languages, people can interact with the map and find out which langauges etc.
+It’s not something you’ll do in a talk itself that much, but for people following along on their own computer either live, or after the fact, then it’s useful.<sup id="fnref:webhosting"><a href="#fn:webhosting" class="footnote">2</a></sup></p>
+
+<p>Another difference between the two is the flexibility with regards to appearance. 
+Whilst beamer presentations can be styled according to pre-built (such as <a href="https://hartwork.org/beamer-theme-matrix/">Warsaw, Malmoe or Frankfurt</a>, or the <em>very</em> nice <a href="https://github.com/matze/mtheme">metropolis theme</a>) or custom templates, reveal.js can be styled using javascript and css.
+This gives more flexibility, since all that is required is relatively rudimentary css skills, and properties can be assigned ‘on the fly’ according to the needs of the user.
+This is not to say that you <em>can’t</em> do similar styling with beamer, it is just easier and quicker in my experience to do it with css.</p>
+
+<h2 id="drawbacks-vs-beamer">Drawbacks vs. beamer</h2>
+
+<p>Mostly, the process of making reveal.js slides works in much the same way as with beamer, with the only major difference being the markup language.</p>
+
+<div class="language-tex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">\begin{frame}</span>
+<span class="nt">\begin{itemize}</span>
+<span class="k">\item</span> Here is a bullet point.
+<span class="k">\item</span> <span class="k">\textit</span><span class="p">{</span>With another written in italics<span class="p">}</span>.
+<span class="k">\item</span> <span class="k">\textsc</span><span class="p">{</span>And another in small caps<span class="p">}</span>.
+<span class="nt">\end{itemize}</span>
+<span class="nt">\end{frame}</span>
+</code></pre></div></div>
+
+<p>Is broadly equivalent to (with italics and small caps defined in a css file):</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;section&gt;</span>
+<span class="nt">&lt;ul&gt;</span>
+<span class="nt">&lt;li&gt;</span>Here is a bullet point<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;li&gt;&lt;span</span> <span class="na">class=</span><span class="s">"italics"</span><span class="nt">&gt;</span>With another written in italics<span class="nt">&lt;/span&gt;</span>.<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;li&gt;&lt;span</span> <span class="na">class=</span><span class="s">"smallcaps"</span><span class="nt">&gt;</span>And another in small caps<span class="nt">&lt;/span&gt;</span>.<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;/section&gt;</span>
+</code></pre></div></div>
+
+<p>In practice however, the markup language differences will have little to no effect on the writing process — aside from a couple of specific instances, discussed below — as a good text editor with snippet support will result in the same number of keystrokes being used to add in all of the surrounding markup, so the writer can focus on the content.</p>
+
+<p>The areas where there are noticeable differences for specifically linguists come in three areas: citations, examples and tree drawing.
+All of which are easily integrated into the LaTeX workflow through different packages , notably <code class="highlighter-rouge">biblatex/natbib</code> in the former case, <code class="highlighter-rouge">gb4e/linguex</code> for examples, and (some variant of) <code class="highlighter-rouge">qtree/forest</code> in the latter.
+The big advantage of using these is that they directly integrate with latex and fit seamlessly into the text: these are compiled at the same time as the text, with the result that the native formatting of the paper and slides is used.
+Furthermore, in the case of citations they can be formatted according to the usual standards of the field.</p>
+
+<p>Those accustomed to writing papers and slides in LaTeX will find initially that these aspects of reveal.js are less intuitive for their workflow.
+That said, there are ways around them, which are equally, or near equally good, though, it is not as seamless a process as with writing sides with beamer.</p>
+
+<h2 id="citations">Citations</h2>
+
+<p>The first instance is with citations. 
+Ususally, at the end of a paper, one will find a list of citations like below:</p>
+
+<p><img src="/assets/img/citations.png" alt="citation image" />
+<em>Usual method of citations.</em></p>
+
+<p>Usually, academics carry this over to slides as well, particularly if writing in beamer, given that the commands are the same.
+Unless one uses pandoc to generate reveal.js slides — I’ll shortly write a how-to, including advantages and disadvantages of this — there is no direct way to generate a citation list as given in the example above. 
+Html and css do not support bibliography management as far as I know, and whilst one can export a citation list using <a href="https://www.zotero.org/support/creating_bibliographies">Zotero</a> or <a href="https://knowledge.exlibrisgroup.com/RefWorks/Legacy_RefWorks/03Get_References/040Creating_a_Simple_Reference_List">Refworks</a> into html and incorporate that into your slides, this is still indirect, and is vulnerable to forgetting to include citations.
+One of the great things about LaTeX is that you need only include <code class="highlighter-rouge">\citet{reference}</code>, run biber/bibtex and it will appear there.</p>
+
+<p>Since reveal.js does not offer this system then one has to change things a little.
+The obvious change, and the one that I use is to simply adapt to the system one is using and link your citations as hyperlinks in the slides.
+For instance:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;section&gt;</span>
+<span class="nt">&lt;ul&gt;</span>
+<span class="nt">&lt;li&gt;&lt;a</span> <span class="na">class=</span><span class="s">'citation'</span> <span class="na">href=</span><span class="s">"moskalglossa"</span><span class="nt">&gt;</span>Moskal (2018)<span class="nt">&lt;/a&gt;</span> has argued that suppletion is never seen for the inclusive alone.<span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;/section&gt;</span>
+</code></pre></div></div>
+
+<p>The above will render as the following (with styling of the citation link done in css).
+The benefit of doing it like this is that one allows the audience to see the citation, and if they are following the slides along on their own device (it’s very easy to host slides online before your talk, for instance on github, or a personal website), they can click the links to arrive at the paper.
+The downside is that the audience cannot check a reference list in realtime to see what ‘Moskal (2018)’ (in the above example) refers to,by leafing to the end of the handout.
+However, I think that this is a relatively minor drawback, especially if one is already hosting the slides online: the citation is there.
+Furthermore, there is a major benefit in that you are taking the reader directly to the citation, rather than just telling them where to find it.</p>
+
+<p>That said, the attachment of academics to a reference list at the end is fair, and it is useful.
+With reveal.js you can make reference lists to use.
+What is needed is to use an external way of making the list, and copy-pasting the list into the slides at the end.
+As noted above, Zotero and Refworks offer such a possibility, and it’ also possible to do it using <a href="https://pandoc.org">Pandoc</a> and Ptyhon (which I will outline soon.)</p>
+
+<h2 id="trees">Trees</h2>
+
+<p>Overall, a major benefit of using LaTeX is that there is a large amount of packages ready for use that have been developed over the years. 
+Given that reveal.js is a relatively new framework for making slides, and that it is not often used by adcademics, such packages are missing.
+This is starkly the case with tree drawing, something that is really easily handled by <code class="highlighter-rouge">qtree/forest</code> using LaTeX.</p>
+
+<div class="language-tex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">\begin{tikzpicture}</span>[baseline]
+<span class="k">\Tree</span> [ [ A woman ] [ saw [ a dog ] ]
+<span class="nt">\end{tikzpicture}</span>
+</code></pre></div></div>
+
+<p>Again, html and css don’t offer any native functionality to draw trees in this way.
+It <em>is</em> possible to do so using some javascript libraries: <a href="https://mermaid-js.github.io/mermaid/#/">Mermaid</a>, though intended as a library for making flow charts, can mimick syntactic trees (see <a href="https://pwsmith88.gitlab.io/reveal/quandt_brussels.html#/4/9">here</a> for a presentation I made using this method), however, it is far from ideal to do so.
+A better option is to simply draw the trees in graphic making software and export it as a png for inclusion in the talk.<sup id="fnref:svgnote"><a href="#fn:svgnote" class="footnote">3</a></sup> 
+There are some good options in this case, and I prefer to use <a href="https://inkscape.io">Inkscape</a>, which makes the job very easy to do once you know the program.</p>
+
+<h2 id="laying-out-examples">Laying out examples</h2>
+
+<p>Linguistics has a specific set of typographical requirements, chief among them the need to put examples in numbered lists.
+Using LaTeX makes this easy to do, by using either the <code class="highlighter-rouge">gb4e</code> or the <code class="highlighter-rouge">linguex</code> package.
+What is nice about these packages is that they will not only do the numbering automatically, but they also line up the examples together so that they all start at the same level of indentation.
+It is possible to recreate this behaviour for reveal.js presentations by making the layout in css.
+I have made a css template, <a href="https://github.com/pwsmith/htmlex">htmlex</a>, that should serve as the basis.</p>
+
+<p>In brief, the idea is to use css counters to create the numbering, flexboxes to line the elements up in right place, and to use <a href="https://linguistics.stackexchange.com/questions/3/how-do-i-format-an-interlinear-gloss-for-html/159#159">this answer</a> for getting the words and the glosses lined up right.
+The result, as you can see below is a pretty good recreation of what <code class="highlighter-rouge">gb4e/linguex</code> would make for you.</p>
+
+<!-- <div class="gloss-example-container">
+    <div class='gloss-individual-example'>
+        <div class='example-number'><p class='ex'></p></div>
+        <div class="ab-counter"><p class='ab'></p></div>
+        <div class='judgement'><p>#</p></div>
+        <div class='gloss-example'>
+            <ol class='sentence'>
+                <li class="gloss-individual-word">
+                    <ol class='word'>
+                        <li class="target-word">Ik</li>
+                        <li class="target-gloss">I.<span class='smallcaps'>nom</span></li>
+                    </ol>
+                </li>
+                <li class="gloss-individual-word">
+                    <ol class='word'>
+                        <li class="target-word">zag</li>
+                        <li class="target-gloss">see.<span class='smallcaps'>past</span></li>
+                    </ol>
+                </li>
+                <li class="gloss-individual-word">
+                    <ol class='word'>
+                        <li class="target-word">twee</li>
+                        <li class="target-gloss">two</li>
+                    </ol>
+                </li>
+                <li class="gloss-individual-word">
+                    <ol class='word'>
+                        <li class="target-word">ber-en,</li>
+                        <li class="target-gloss">bear-<span class='smallcaps'>pl</span></li>
+                    </ol>
+                </li>
+                <li class="gloss-individual-word">
+                    <ol class='word'>
+                        <li class="target-word">brood-je-s</li>
+                        <li class="target-gloss">bread-<span class='smallcaps'>dim-pl</span></li>
+                    </ol>
+                </li>
+                <li class="gloss-individual-word">
+                    <ol class='word'>
+                        <li class="target-word">smer-en</li>
+                        <li class="target-gloss">spread-<span class='smallcaps'>inf</span></li>
+                    </ol>
+                </li>
+            </ol>
+            <p class='translation'>'I saw two bears, spreading on sandwiches.'</p>
+        </div>
+    </div>
+</div> -->
+
+<div class="gloss-example-container">
+    <div class="gloss-individual-example">
+        <div class="example-number"><p class="ex"></p></div>
+        <div class="ab-counter"><p class="ab"></p></div>
+        <div class="judgement"><p>#</p></div>
+        <div class="gloss-example">
+            <ol class="sentence">
+                <li class="gloss-individual-word">
+                    <ol class="word">
+                        <li class="target-word">Ik</li>
+                        <li class="target-gloss">I.<span class="smallcaps">nom</span></li>
+                    </ol>
+                </li>
+                <li class="gloss-individual-word">
+                    <ol class="word">
+                        <li class="target-word">zag</li>
+                        <li class="target-gloss">see.<span class="smallcaps">past</span></li>
+                    </ol>
+                </li>
+                <li class="gloss-individual-word">
+                    <ol class="word">
+                        <li class="target-word">twee</li>
+                        <li class="target-gloss">two</li>
+                    </ol>
+                </li>
+                <li class="gloss-individual-word">
+                    <ol class="word">
+                        <li class="target-word">ber-en,</li>
+                        <li class="target-gloss">bear-<span class="smallcaps">pl</span></li>
+                    </ol>
+                </li>
+                <li class="gloss-individual-word">
+                    <ol class="word">
+                        <li class="target-word">brood-je-s</li>
+                        <li class="target-gloss">bread-<span class="smallcaps">dim-pl</span></li>
+                    </ol>
+                </li>
+                <li class="gloss-individual-word">
+                    <ol class="word">
+                        <li class="target-word">smer-en</li>
+                        <li class="target-gloss">spread-<span class="smallcaps">inf</span></li>
+                    </ol>
+                </li>
+            </ol>
+            <p class="translation">'I saw two bears, spreading on sandwiches.'</p>
+        </div>
+    </div>
+    <div class="gloss-individual-example">
+        <div class="example-number"><p></p></div>
+        <div class="ab-counter"><p class="ab"></p></div>
+        <div class="judgement"><p></p></div>
+        <div class="gloss-example">
+            <ol class="sentence">
+                <li class="gloss-individual-word">
+                    <ol class="word">
+                        <li class="target-word">Oh</li>
+                        <li class="target-gloss">Oh</li>
+                    </ol>
+                </li>
+                <li class="gloss-individual-word">
+                    <ol class="word">
+                        <li class="target-word">dat</li>
+                        <li class="target-gloss">that</li>
+                    </ol>
+                </li>
+                <li class="gloss-individual-word">
+                    <ol class="word">
+                        <li class="target-word">was</li>
+                        <li class="target-gloss">be.<span class="smallcaps">3.sg.past</span></li>
+                    </ol>
+                </li>
+                <li class="gloss-individual-word">
+                    <ol class="word">
+                        <li class="target-word">een</li>
+                        <li class="target-gloss">a</li>
+                    </ol>
+                </li>
+                <li class="gloss-individual-word">
+                    <ol class="word">
+                        <li class="target-word">wonder!</li>
+                        <li class="target-gloss">miracle</li>
+                    </ol>
+                </li>
+            </ol>
+            <p class="translation">'Oh that was a miracle!'</p>
+        </div>
+    </div>
+</div>
+
+<!-- <p>Hello</p> -->
+
+<!-- ![gloss-example](/Assets/img/gloss-example.png)
+*Screenshot of a glossed example created using the css styling in [htmlex](https://github.com/pwsmith/htmlex)* -->
+
+<p>Of course, it is a little different from making the equivalent in LaTeX — given the markup differences this is inevitable — however, there are some nice aspects to it.
+Below is the LaTeX markup:</p>
+
+<div class="language-tex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">\begin{exe}</span>
+    <span class="k">\ex</span><span class="na">[\#]</span> <span class="p">{</span>
+        <span class="k">\gll</span> Ik zag twee ber-en, brood-je-s smer-en<span class="k">\\</span>
+    I.<span class="k">\textsc</span><span class="p">{</span>nom<span class="p">}</span> see.<span class="k">\textsc</span><span class="p">{</span>past<span class="p">}</span> two bear-<span class="k">\textsc</span><span class="p">{</span>pl<span class="p">}</span> bread-<span class="k">\textsc</span><span class="p">{</span>dim<span class="p">}</span>-<span class="k">\textsc</span><span class="p">{</span>pl<span class="p">}</span> spread-<span class="k">\textsc</span><span class="p">{</span>inf<span class="p">}</span><span class="k">\\</span>
+    <span class="k">\glt</span> `I saw two bears, spreading on sandwiches.'<span class="p">}</span>
+<span class="nt">\end{exe}</span>
+</code></pre></div></div>
+
+<p>and here is the html equivalent using htmlex:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"gloss-example-container"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">'gloss-individual-example'</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">'example-number'</span><span class="nt">&gt;&lt;p</span> <span class="na">class=</span><span class="s">'ex'</span><span class="nt">&gt;&lt;/p&gt;&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"ab-counter"</span><span class="nt">&gt;&lt;p</span> <span class="na">class=</span><span class="s">'ab'</span><span class="nt">&gt;&lt;/p&gt;&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">'judgement'</span><span class="nt">&gt;&lt;p&gt;</span>#<span class="nt">&lt;/p&gt;&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">'gloss-example'</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">'sentence'</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"gloss-individual-word"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">'word'</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"target-word"</span><span class="nt">&gt;</span>Ik<span class="nt">&lt;/li&gt;</span>
+                        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"target-gloss"</span><span class="nt">&gt;</span>I.<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">'smallcaps'</span><span class="nt">&gt;</span>nom<span class="nt">&lt;/span&gt;&lt;/li&gt;</span>
+                    <span class="nt">&lt;/ol&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"gloss-individual-word"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">'word'</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"target-word"</span><span class="nt">&gt;</span>zag<span class="nt">&lt;/li&gt;</span>
+                        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"target-gloss"</span><span class="nt">&gt;</span>see.<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">'smallcaps'</span><span class="nt">&gt;</span>past<span class="nt">&lt;/span&gt;&lt;/li&gt;</span>
+                    <span class="nt">&lt;/ol&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"gloss-individual-word"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">'word'</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"target-word"</span><span class="nt">&gt;</span>twee<span class="nt">&lt;/li&gt;</span>
+                        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"target-gloss"</span><span class="nt">&gt;</span>two<span class="nt">&lt;/li&gt;</span>
+                    <span class="nt">&lt;/ol&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"gloss-individual-word"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">'word'</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"target-word"</span><span class="nt">&gt;</span>ber-en,<span class="nt">&lt;/li&gt;</span>
+                        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"target-gloss"</span><span class="nt">&gt;</span>bear-<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">'smallcaps'</span><span class="nt">&gt;</span>pl<span class="nt">&lt;/span&gt;&lt;/li&gt;</span>
+                    <span class="nt">&lt;/ol&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"gloss-individual-word"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">'word'</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"target-word"</span><span class="nt">&gt;</span>brood-je-s<span class="nt">&lt;/li&gt;</span>
+                        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"target-gloss"</span><span class="nt">&gt;</span>bread-<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">'smallcaps'</span><span class="nt">&gt;</span>dim-pl<span class="nt">&lt;/span&gt;&lt;/li&gt;</span>
+                    <span class="nt">&lt;/ol&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"gloss-individual-word"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">'word'</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"target-word"</span><span class="nt">&gt;</span>smer-en<span class="nt">&lt;/li&gt;</span>
+                        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"target-gloss"</span><span class="nt">&gt;</span>spread-<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">'smallcaps'</span><span class="nt">&gt;</span>inf<span class="nt">&lt;/span&gt;&lt;/li&gt;</span>
+                    <span class="nt">&lt;/ol&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+            <span class="nt">&lt;/ol&gt;</span>
+            <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">'translation'</span><span class="nt">&gt;</span>'I saw two bears, spreading on sandwiches.'<span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<p>The html version is more code, certainly.
+However, if your text editor is configured well then you can automatically add in the tags with snippets, and so it works out roughly the same amount of work.</p>
+
+<p>What is nice about doing it this way, however, is that the target words and the glosses are kept together, which does make it easy to find out what a word means in the source code.</p>
+
+<p>You can see a <a href="https://pwsmith.github.io/case-typology/wk2_configurational_case.html">live example</a> of a reveal.js presentation that put examples in in this way.</p>
+
+<h2 id="final-thoughts">Final thoughts</h2>
+
+<p>In sum, reveal.js offers a nice alternative to making slide decks.
+At its most basic, it lacks some functionality of beamer that many who use beamer will have come to rely upon, but the changes to workflow needed to overcome this are not that big.
+Using Inkscape to draw trees, for instance, is not such a big deal.
+Thus, it’s well worth trying out.</p>
+
+<p>It does take a little bit of time to get usedto coming from a previous way of making slides, whether that is from beamer or from powerpoint/keynote, however, it is a nice alternative and the slides are nice and crucially non-static.
+I don’t think that it would take too long to get used to using reveal.js: it didn’t take me particularly long and my knowledge of css and html is not especially advanced.
+Some may be put off fromusing it because of the need to use a different markup language, which will inevitably take a little time to get used to.
+However, in my experience the adjustment isn’t that much work and worth putting the time in.
+The <a href="https://github.com/hakimel/reveal.js/">user guide</a> is very detailed and well set out, so information is easy at hand for those who need a reference guide.
+<!-- Furthermore, I've outlined another guide for users of the linguistics template, with information about example usage and more generally [here](here). --></p>
+
+<p>A summary of the key points:</p>
+<ul>
+  <li>html based slide decks</li>
+  <li>only needs a text editor to write and a web browser to display</li>
+  <li>citations can link to the papers directly</li>
+  <li>trees should be made in a graphics editing program like Inkscape and then imported in with a png.</li>
+  <li>Examples are laid out using css flexbox.</li>
+</ul>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>Yes, I know that you can run powerpoint on Apple, but it never works <em>quite</em> as well as you’d hope. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:webhosting">
+      <p>You can host the slides on github or gitlab and share the address with the audience. <a href="#fnref:webhosting" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:svgnote">
+      <p>Exporting to png is not the only option, one can also include the images as svg files, in which case it is possible, though not trivial, to animate the trees as one can do so with any svg element on a webpage. This is useful if you have used beamer overlays to make trees grow or to dynamically add items to them. But, this is a topic for a different day. <a href="#fnref:svgnote" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

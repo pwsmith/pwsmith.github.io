@@ -85,7 +85,7 @@ Finally, they offer the ability to define your own keybindings and snippets.
 Snippets for instance allow you to automatically insert a block of text by specifying a keyword.
 For instance, one of mine is such that typing `exe` and hitting `tab`, causes the following code to appear, with the cursor placed after `\ex `:
 
-```
+```tex
 \begin{exe}
   \ex
 \end{exe}
@@ -94,7 +94,7 @@ For instance, one of mine is such that typing `exe` and hitting `tab`, causes th
 It's a relatively simple one, but saves *a lot* of typing, and they can go as complex as you want.
 Another of mine, `tree` + `tab` gives:
 
-```
+```tex
 \begin{exe}
   \ex
   \begin{tikzpicture}[baseline]
@@ -105,7 +105,7 @@ Another of mine, `tree` + `tab` gives:
 
 If you've ever written bulletpointed slides in beamer, having a shortcut to input:
 
-```
+```tex
 \begin{itemize}
   \item
 \end{itemize}
@@ -122,7 +122,7 @@ What more do you need?
 The *problem* with TIPA is what it does to your source code.[^TIPA]
 Writing something simple in TIPA like the pronunctiation of *placate* /pləˈkeɪt/ will need the following code:
 
-```
+```tex
 \textipa{pl@'ke1t}
 ```
 
@@ -160,7 +160,7 @@ However, at some point your LaTeX preamble (for the uninitiated, the set of pack
 Rather than having one document from where you copy-paste your preamble time after time, just store it locally.
 For instance, suppose that your preamble you use for everything is as follows:
 
-```
+```tex
 \usepackage{fontspec}
 \setmainfont{Linux Libertine O}
 \usepackage[
@@ -210,7 +210,7 @@ For Linux, this means in a directory `USER > texmf > tex > latex > local` (USER 
 Then any files you store there will be visible to tex.
 So, if you were to copy your usual preamble into the file `packages.sty`, and save it in the local directory (as just specified), then all you need is:
 
-```
+```tex
 \documentclass{article}
 \usepackage{packages}
 ...
