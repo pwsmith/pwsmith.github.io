@@ -1,0 +1,264 @@
+I"*e<p>In this post I will show how to make a fully formatted citation list if you have made slides in reveal.js.
+This is useful if you are giving an academic presentation with the slides, and want to follow the convention of giving a short citation note in the slide, with the full information at the end.</p>
+
+<h2 id="why">Why?</h2>
+
+<p>One of the drawbacks of reveal.js, that I noted <a href="/2020/01/11/reveal.js-for-linguistics/">in the overview</a> is that there is no native way of making a citation list in html.
+That is, there is no equivalent of bibtex/biblatex that will automatically scan your file for citation keys, and output a formatted list of references at the end of your document based upon what it finds.
+In the same post, I outlined why I don’t think that this is a problem in and of itself — a reference list is effectively a way of pointing someone viewing your slides to a source, and there are html-based ways of doing that, such as making a hyperlink using the <code class="highlighter-rouge">&lt;a&gt;...&lt;/a&gt;</code> tag.
+Yet, despite some positives, there are a couple of drawbacks: unpublished work that is not associated with a url is difficult to incorporate, and, whilst it is easy to click on links if you are viewing the slides at a later point, if you are in the audience at the talk and don’t have online access to the slides, then you can’t check which exact source is being used.<sup id="fnref:host"><a href="#fn:host" class="footnote">1</a></sup>
+It is also a convention of academia that one provides references as well, so it is understandable to want a formatted list at the end.</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<p>This method requires use of the command line and the ability to run a python script.
+So, you should have a basic knowledge of the command line on your computer (nothing complex, but how to open the terminal, how to navigate to a directory, and how to put in basic commands), as well as having <a href="https://www.python.org/">Python</a> installed.
+Furthermore, we will be using <a href="https://pandoc.org">Pandoc</a> to generate the citation list.</p>
+
+<h3 id="install-python">Install Python</h3>
+
+<p>You can check if Python is already installed on your computer by typing into the command line:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python <span class="nt">--version</span>
+</code></pre></div></div>
+
+<p>If the output gives (with the value of X depending on what version is installed on your system), then you’re good.<sup id="fnref:python2"><a href="#fn:python2" class="footnote">2</a></sup></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Python 3.X.X
+</code></pre></div></div>
+
+<p>Note that if you are using a Mac, it’s likely that you’ll have both Python 2 and Python 3 installed.<sup id="fnref:windows"><a href="#fn:windows" class="footnote">3</a></sup>
+You can check if Python 3 is available on your system by typing:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 <span class="nt">--version</span>
+</code></pre></div></div>
+
+<p>If this is the case, then wherever I use the command <code class="highlighter-rouge">python</code> in this guide, you should replace it with <code class="highlighter-rouge">python3</code>.
+If you receive a notice <code class="highlighter-rouge">command not found: python</code>, then you need to <a href="https://www.python.org/downloads/">install python</a>.</p>
+
+<h3 id="install-pandoc">Install Pandoc</h3>
+
+<p>Pandoc is a command line tool useful for converting documents from one file type to another.
+Instructions for installing it on a variety of systems can be found <a href="https://pandoc.org/installing.html">here</a>.<sup id="fnref:pandocinstall"><a href="#fn:pandocinstall" class="footnote">4</a></sup></p>
+
+<h3 id="bibliography">Bibliography</h3>
+
+<p>Finally, you’ll need a LaTeX style bibliography.
+If you don’t have one already, you can make one using <a href="https://bibdesk.sourceforge.io/">Bibdesk</a>, <a href="https://www.jabref.org/">Jabref</a> or <a href="https://www.zotero.org/">Zotero</a> (amongst others).</p>
+
+<h2 id="step-1-incorporating-citation-keys">Step 1: Incorporating citation keys</h2>
+
+<p>The first step is to incorporate citation keys within the document.
+In <a href="/2020/01/11/reveal.js-for-linguistics/">my overview</a>, I noted that given that reveal.js makes slide decks that are web-based, it makes sense to make use of this and cite other works as a hyperlink where possible, to take the reader right to the selected work.
+I will take this approach here.
+Given that the slides are written in html, we will be using the <code class="highlighter-rouge">&lt;a&gt;...&lt;/a&gt;</code> tag, where (the <code class="highlighter-rouge">href</code> value is set to the webpage of the citation, and the text between the tags is what you want displayed on the slide).
+Below is a sample document before we’ve put in the citation keys, which I’ll be using as a toy example for the remainder of the tutorial:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- aba.html --&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"linguistic-examples.css"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;title&gt;</span>Generating html references<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+    <span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"https://www.glossa-journal.org/article/10.5334/gjgl.362/"</span><span class="nt">&gt;</span>Moskal (2018)<span class="nt">&lt;/a&gt;</span> shows that suppletion for the exclusive happens only when the inclusive pronoun is also suppletive.
+    This follows in work on *ABA patterns in suppletion in <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://mitpress.mit.edu/books/universals-comparative-morphology"</span><span class="nt">&gt;</span>Bobaljik (2012)<span class="nt">&lt;/a&gt;</span> and <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://link.springer.com/article/10.1007%2Fs11049-018-9425-0"</span><span class="nt">&gt;</span>Smith et al (2019)<span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>In order to eventually access the bibliography entry for the citation, one should also incorporate a citation key using <code class="highlighter-rouge">data-citation-key</code>, which is a custom attribute added to <code class="highlighter-rouge">&lt;a&gt;</code> elements in order to specify a citation key.<sup id="fnref:name-of-citekey"><a href="#fn:name-of-citekey" class="footnote">5</a></sup> 
+The value of <code class="highlighter-rouge">data-citation-key</code> should correspond to the citation key in your .bib file.
+As we will eventually be converting a markdown document to generate the bibliography, we need to include <code class="highlighter-rouge">@</code> immediately before the citation key value, as this is the citation identifier in markdown. 
+A basic citation would then look like the following:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://www.glossa-journal.org/article/10.5334/gjgl.362/"</span> <span class="na">data-citation-key=</span><span class="s">"@moskal2018"</span><span class="nt">&gt;</span>Moskal (2018)<span class="nt">&lt;/a&gt;</span>
+</code></pre></div></div>
+
+<p><strong>Important</strong>: the value <em>after</em> <code class="highlighter-rouge">@</code> in the field for <code class="highlighter-rouge">data-citation-key</code> <em>must</em> match the citation key in your .bib file.
+That is, the value of <code class="highlighter-rouge">data-citation-key</code> should be of the form <code class="highlighter-rouge">@+cite_key</code>.</p>
+
+<p>Our toy source file would then look like the following, once the <code class="highlighter-rouge">data-citation-key</code> values are added:<sup id="fnref:yearsmatch"><a href="#fn:yearsmatch" class="footnote">6</a></sup></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;html&gt;</span>
+    <span class="nt">&lt;head&gt;</span>
+        <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"linguistic-examples.css"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/head&gt;</span>
+    <span class="nt">&lt;body&gt;</span>
+        <span class="nt">&lt;title&gt;</span>Generating html references<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;/body&gt;</span>
+    <span class="nt">&lt;p&gt;&lt;a</span> <span class="na">href=</span><span class="s">"https://www.glossa-journal.org/article/10.5334/gjgl.362/"</span> <span class="na">data-citation-key=</span><span class="s">"@moskal2017"</span><span class="nt">&gt;</span>Moskal (2018)<span class="nt">&lt;/a&gt;</span> shows that suppletion for the exclusive happens only when the inclusive pronoun is also suppletive.
+    This follows in work on *ABA patterns in suppletion in <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://mitpress.mit.edu/books/universals-comparative-morphology"</span> <span class="na">data-citation-key=</span><span class="s">"@bobaljik2012"</span><span class="nt">&gt;</span>Bobaljik (2012)<span class="nt">&lt;/a&gt;</span> and <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://link.springer.com/article/10.1007%2Fs11049-018-9425-0"</span> <span class="na">data-citation-key=</span><span class="s">"@smithetal2016"</span><span class="nt">&gt;</span>Smith et al (2019)<span class="nt">&lt;/a&gt;&lt;/p&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<h2 id="step-2-extracting-the-citation-keys">Step 2: Extracting the citation keys</h2>
+
+<p>Once all of the citation keys are in the html document, they need to be extracted so that there is a list containing all the citation keys that you want to then be references.
+We will use Python for this step. 
+Overall, we want to be able to call the .py script from the command line, and in the same command specify which .html source file to look for the citations in.
+So, we will aim for the following:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python SCRIPT.py SOURCE.html
+</code></pre></div></div>
+
+<p>For the first step, we will use the <code class="highlighter-rouge">sys</code> library in python, which should already be present in your Python installation. 
+In order to extract the citation keys we will use <a href="https://www.crummy.com/software/BeautifulSoup/">Beautiful Soup</a>, which is a Python library for processing the html code underlying web pages.
+Firstly, install Beautiful Soup on your system using the following at the command line:<sup id="fnref:pip3"><a href="#fn:pip3" class="footnote">7</a></sup></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install</span> <span class="nt">--user</span> beautifulsoup4
+</code></pre></div></div>
+
+<p>Make a file — we’ll call it <code class="highlighter-rouge">refgrab.py</code> here, but the name doesn’t matter too much — and insert the following:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#rebgrab.py
+</span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+
+<span class="nb">file</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span> <span class="s">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s">'a'</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">link</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'data-citation-key'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>What this does:</p>
+<ol>
+  <li>Imports the <code class="highlighter-rouge">sys</code> library.</li>
+  <li>Imports the Beautiful Soup library.</li>
+  <li>Scans the file picked out by <code class="highlighter-rouge">sys.argv[1]</code> (the second file you specify on the command line, in our case, <code class="highlighter-rouge">aba.html</code>), looks for all <code class="highlighter-rouge">&lt;a&gt;</code> elements in that file and returns a list of each value of <code class="highlighter-rouge">data-citation-key</code> associated with each <code class="highlighter-rouge">&lt;a&gt;</code>.<sup id="fnref:missingas"><a href="#fn:missingas" class="footnote">8</a></sup>
+This list is what we will use to build our reference list.
+We can run this script on our toy example using the following:</li>
+</ol>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python refgrab.py aba.html
+</code></pre></div></div>
+
+<p>It will return the following to the terminal window:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@moskal2017
+@bobaljik2012
+@smithetal2016
+</code></pre></div></div>
+
+<h2 id="step-3-making-the-reference-list">Step 3: Making the reference list</h2>
+
+<p>Now that we have a way to extract all the citation keys from our html document, we need a way to allow Pandoc to access them. 
+One way to do this is to print the output of <code class="highlighter-rouge">refgrab.py</code> to its own file.
+To do this, redirect the output of <code class="highlighter-rouge">refgrab.py</code> to a temporary markdown file <code class="highlighter-rouge">refs_temp.md</code> that we’ll delete later on:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python refgrab.py PRESENTATION.html <span class="o">&gt;</span> refs_temp.md
+</code></pre></div></div>
+
+<p>This will produce a document like the following, from our sample file above:</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@moskal2018
+@bobaljik2012
+@smithetal2016
+</code></pre></div></div>
+
+<p>Alternatively, if you don’t want to generate an intermediate file, you can pipe the output of the python script directly to Pandoc, as described <a href="#saving-time">later on</a>.</p>
+
+<h2 id="step-4-generating-the-citation-list">Step 4: Generating the citation list</h2>
+
+<p>With the file <code class="highlighter-rouge">refs_temp.md</code>, we can now build a citation list of what is contained within.
+To do this, run the following command, subsituting the bibliography path for the relevant one for your bibliography.
+If you chose a name other than <code class="highlighter-rouge">refs_temp</code> for the markdown file in the previous step, use that name instead of <code class="highlighter-rouge">refs_temp.</code><sup id="fnref:irrelevantnames"><a href="#fn:irrelevantnames" class="footnote">9</a></sup></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pandoc <span class="nt">--bibliography</span> /home/pwsmith/Dropbox/Ducks/biblio.bib <span class="nt">--filter</span> pandoc-citeproc refs_temp.md <span class="nt">-o</span> references.html
+</code></pre></div></div>
+
+<h2 id="step-5-incorporating-the-citations-into-your-document">Step 5: Incorporating the citations into your document</h2>
+
+<p>Finally, with the references generated, you should end up with a file called <code class="highlighter-rouge">references.html</code> with the following as its content:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;p&gt;&lt;span</span> <span class="na">class=</span><span class="s">"citation"</span> <span class="na">data-cites=</span><span class="s">"moskal2017"</span><span class="nt">&gt;</span>Moskal (2018)<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"citation"</span> <span class="na">data-cites=</span><span class="s">"bobaljik2012"</span><span class="nt">&gt;</span>Bobaljik (2012)<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"citation"</span> <span class="na">data-cites=</span><span class="s">"smithetal2016"</span><span class="nt">&gt;</span>Smith et al. (2019)<span class="nt">&lt;/span&gt;&lt;/p&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"refs"</span> <span class="na">class=</span><span class="s">"references hanging-indent"</span> <span class="na">role=</span><span class="s">"doc-bibliography"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"ref-bobaljik2012"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;p&gt;</span>Bobaljik, Jonathan D. 2012. <span class="nt">&lt;em&gt;</span>Universals in Comparative Morphology<span class="nt">&lt;/em&gt;</span>. Cambridge, MA: MIT Press.<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"ref-moskal2017"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;p&gt;</span>Moskal, Beata. 2018. “Suppletion Patterns in Clusivity and the Role of Markedness.” <span class="nt">&lt;em&gt;</span>Glossa<span class="nt">&lt;/em&gt;</span> to appear, expected publication in 2018.<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"ref-smithetal2016"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;p&gt;</span>Smith, Peter W., Beata Moskal, Ting Xu, Jungmin Kang, and Jonathan D. Bobaljik. 2019. “Case and Number Suppletion in Pronouns.” <span class="nt">&lt;em&gt;</span>Natural Language and Linguistic Theory<span class="nt">&lt;/em&gt;</span> 37 (3): 1029–1101.<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<p>Pandoc generates both the reference list, which is what we are after, as well as the intext citations, which we don’t need.
+What remains then is to select all the lines contained within the <code class="highlighter-rouge">&lt;div id="refs"&gt;</code> and copy-paste that into the appropriate place in your html document.
+If you’re making a webpage, then you can most likely copy the entire “refs” div.
+If you’re making slides in reveal.js, then you’ll most likely need to split the references over multiple slides so put in <code class="highlighter-rouge">&lt;section&gt;...&lt;/section&gt;</code> elements where needed (and don’t copy the entire “refs” div).
+The output will render as follows in your browser:</p>
+
+<h3 id="bibliography-1">Bibliography</h3>
+
+<div id="refs" class="references hanging-indent" role="doc-bibliography">
+    <div id="ref-bobaljik2012">
+        <p>Bobaljik, Jonathan D. 2012. <em>Universals in Comparative Morphology</em>. Cambridge, MA: MIT Press.</p>
+    </div>
+    <div id="ref-moskal2017">
+        <p>Moskal, Beata. 2018. “Suppletion Patterns in Clusivity and the Role of Markedness.” <em>Glossa</em> to appear, expected publication in 2018.</p>
+    </div>
+    <div id="ref-smithetal2016">
+        <p>Smith, Peter W., Beata Moskal, Ting Xu, Jungmin Kang, and Jonathan D. Bobaljik. 2019. “Case and Number Suppletion in Pronouns.” <em>Natural Language and Linguistic Theory</em> 37 (3): 1029–1101.</p>
+    </div>
+</div>
+
+<h2 id="step-6-deleting-the-temp-files-optional">Step 6: Deleting the temp files (optional)</h2>
+
+<p>The last step is to remove the file <code class="highlighter-rouge">refgrab.py</code>, and, if you want, the <code class="highlighter-rouge">references.html</code>, as they are no longer needed and can be easily regenerated following the steps above if they are.
+To remove them, simply run the command:<sup id="fnref:tempnames"><a href="#fn:tempnames" class="footnote">10</a></sup></p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">rm </span>refs_temp.md references.html
+</code></pre></div></div>
+
+<h2 id="saving-time">Saving time</h2>
+
+<p>If you’re comfortable with all of the above steps, you can simply run one command (and not build <code class="highlighter-rouge">refs_temp.md</code>) by piping the output of the python script directly into pandoc.
+In which case, steps 3 and 4 are conflated into one:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python refgrab.py SOURCE.html | pandoc <span class="nt">--bibliography</span> /home/pwsmith/Dropbox/Ducks/biblio.bib <span class="nt">--filter</span> pandoc-citeproc <span class="nt">-o</span> references.html
+</code></pre></div></div>
+
+<p>Again, be sure to put in the relevant names and pathways for the python script, source file and bibliography.</p>
+
+<h2 id="notes">Notes</h2>
+<div class="footnotes">
+  <ol>
+    <li id="fn:host">
+      <p>That said, if you use reveal.js to make slides, then it makes sense to host the slides online, say for instance on Github Pages, and give the audience a link at the beginning of the talk. <a href="#fnref:host" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:python2">
+      <p>If you get the response:<code class="highlighter-rouge">Python 2.X.X</code>, then you should consider upgrading Python. Python 2 is <a href="http://pyfound.blogspot.com/2019/12/python-2-sunset.html?utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed%3A+PythonSoftwareFoundationNews+%28Python+Software+Foundation+News%29">in the process of being deprecated</a>, and will no longer be stable after April 2020. <a href="#fnref:python2" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:windows">
+      <p>This may also be the case for Windows, but I don’t know. <a href="#fnref:windows" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:pandocinstall">
+      <p>If you’re using Linux, then pandoc can be installed using various package managers, but be aware that you should upgrade the package to the latest version after installation, as older versions are often installed. I’m assuming that for this guide, the latest version is installed on your system — on mine it is 2.8. <a href="#fnref:pandocinstall" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:name-of-citekey">
+      <p>The only thing that is important here is the prefix <code class="highlighter-rouge">data</code>; <code class="highlighter-rouge">-citation-key</code> is used as its semantically easy to follow. However, one can use whatever you want, e.g. <code class="highlighter-rouge">data-key</code>, <code class="highlighter-rouge">data-citation</code>, <code class="highlighter-rouge">data-ref</code>. <a href="#fnref:name-of-citekey" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:yearsmatch">
+      <p>In my bibliography, the years of the first and third citation key doesn’t match the publication year. This doesn’t matter, I’m just noting in case you’re wondering <em>why</em> it appears that that is the case. <a href="#fnref:yearsmatch" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:pip3">
+      <p>If you are using a Mac with both Python 2 and Python 3 installed, you should use pip3 instead of pip. <a href="#fnref:pip3" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:missingas">
+      <p>If you use <code class="highlighter-rouge">&lt;a&gt;</code> elements that are not citations, then you will end up with some empty references in the markdown file that is generated. Dont’ worry about this: Pandoc will run fine anyway. <a href="#fnref:missingas" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:irrelevantnames">
+      <p>You can pick whatever names you want for this file, and <code class="highlighter-rouge">references.html</code>: they are temporary ones and we’ll delete them in Step 6. <a href="#fnref:irrelevantnames" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:tempnames">
+      <p>Agian, if you used different names for the intermediate files, be sure to use those instead. <a href="#fnref:tempnames" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET
