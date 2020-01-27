@@ -1,4 +1,4 @@
-I"|e<p>In this post I will show how to make a fully formatted citation list if you have made slides in reveal.js.
+I"kf<p>In this post I will show how to make a fully formatted citation list if you have made slides in reveal.js.
 This is useful if you are giving an academic presentation with the slides, and want to follow the convention of giving a short citation note in the slide, with the full information at the end.</p>
 
 <h2 id="why">Why?</h2>
@@ -19,7 +19,7 @@ Furthermore, we will be using <a href="https://pandoc.org">Pandoc</a> to generat
 
 <p>You can check if Python is already installed on your computer by typing into the command line:</p>
 
-<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>python <span class="nt">--version</span>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python <span class="nt">--version</span>
 </code></pre></div></div>
 
 <p>If the output gives (with the value of X depending on what version is installed on your system), then you’re good.<sup id="fnref:python2"><a href="#fn:python2" class="footnote">2</a></sup></p>
@@ -39,7 +39,8 @@ If you receive a notice <code class="highlighter-rouge">command not found: pytho
 <h3 id="install-pandoc">Install Pandoc</h3>
 
 <p>Pandoc is a command line tool useful for converting documents from one file type to another.
-Instructions for installing it on a variety of systems can be found <a href="https://pandoc.org/installing.html">here</a>.<sup id="fnref:pandocinstall"><a href="#fn:pandocinstall" class="footnote">4</a></sup></p>
+Instructions for installing it on a variety of systems can be found <a href="https://pandoc.org/installing.html">here</a>.<sup id="fnref:pandocinstall"><a href="#fn:pandocinstall" class="footnote">4</a></sup>
+We will use the filter <code class="highlighter-rouge">pandoc-citeproc</code>, which sometimes is not included in the installation (e.g. if you’re installing on Linux).</p>
 
 <h3 id="bibliography">Bibliography</h3>
 
@@ -176,7 +177,8 @@ If you chose a name other than <code class="highlighter-rouge">refs_temp</code> 
 
 <p>Finally, with the references generated, you should end up with a file called <code class="highlighter-rouge">references.html</code> with the following as its content:</p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;p&gt;&lt;span</span> <span class="na">class=</span><span class="s">"citation"</span> <span class="na">data-cites=</span><span class="s">"moskal2017"</span><span class="nt">&gt;</span>Moskal (2018)<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"citation"</span> <span class="na">data-cites=</span><span class="s">"bobaljik2012"</span><span class="nt">&gt;</span>Bobaljik (2012)<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"citation"</span> <span class="na">data-cites=</span><span class="s">"smithetal2016"</span><span class="nt">&gt;</span>Smith et al. (2019)<span class="nt">&lt;/span&gt;&lt;/p&gt;</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- references.html --&gt;</span>
+<span class="nt">&lt;p&gt;&lt;span</span> <span class="na">class=</span><span class="s">"citation"</span> <span class="na">data-cites=</span><span class="s">"moskal2017"</span><span class="nt">&gt;</span>Moskal (2018)<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"citation"</span> <span class="na">data-cites=</span><span class="s">"bobaljik2012"</span><span class="nt">&gt;</span>Bobaljik (2012)<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"citation"</span> <span class="na">data-cites=</span><span class="s">"smithetal2016"</span><span class="nt">&gt;</span>Smith et al. (2019)<span class="nt">&lt;/span&gt;&lt;/p&gt;</span>
 <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"refs"</span> <span class="na">class=</span><span class="s">"references hanging-indent"</span> <span class="na">role=</span><span class="s">"doc-bibliography"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"ref-bobaljik2012"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;p&gt;</span>Bobaljik, Jonathan D. 2012. <span class="nt">&lt;em&gt;</span>Universals in Comparative Morphology<span class="nt">&lt;/em&gt;</span>. Cambridge, MA: MIT Press.<span class="nt">&lt;/p&gt;</span>
@@ -192,12 +194,15 @@ If you chose a name other than <code class="highlighter-rouge">refs_temp</code> 
 
 <p>Pandoc generates both the reference list, which is what we are after, as well as the intext citations, which we don’t need.
 What remains then is to select all the lines contained within the <code class="highlighter-rouge">&lt;div id="refs"&gt;</code> and copy-paste that into the appropriate place in your html document.
-If you’re making a webpage, then you can most likely copy the entire “refs” div.
-If you’re making slides in reveal.js, then you’ll most likely need to split the references over multiple slides so put in <code class="highlighter-rouge">&lt;section&gt;...&lt;/section&gt;</code> elements where needed (and don’t copy the entire “refs” div).
-The output will render as follows in your browser:</p>
+Note:</p>
+<ul>
+  <li>If you’re making a webpage, then you can most likely copy the entire “refs” div.</li>
+  <li>If you’re making slides in reveal.js, then you’ll most likely need to split the references over multiple slides so put in <code class="highlighter-rouge">&lt;section&gt;...&lt;/section&gt;</code> elements where needed (and don’t copy the entire “refs” div).</li>
+</ul>
 
-<h3 id="bibliography-1">Bibliography</h3>
+<p>The output will render as follows in your browser:</p>
 
+<div class="otherhighlight">
 <div id="refs" class="references hanging-indent" role="doc-bibliography">
     <div id="ref-bobaljik2012">
         <p>Bobaljik, Jonathan D. 2012. <em>Universals in Comparative Morphology</em>. Cambridge, MA: MIT Press.</p>
@@ -208,6 +213,7 @@ The output will render as follows in your browser:</p>
     <div id="ref-smithetal2016">
         <p>Smith, Peter W., Beata Moskal, Ting Xu, Jungmin Kang, and Jonathan D. Bobaljik. 2019. “Case and Number Suppletion in Pronouns.” <em>Natural Language and Linguistic Theory</em> 37 (3): 1029–1101.</p>
     </div>
+</div>
 </div>
 
 <h2 id="step-6-deleting-the-temp-files-optional">Step 6: Deleting the temp files (optional)</h2>
