@@ -240,7 +240,7 @@ Note:
 
 The output will render as follows in your browser:
 
-<div class="highlight">
+<div class="otherhighlight">
 <div id="refs" class="references hanging-indent" role="doc-bibliography">
     <div id="ref-bobaljik2012">
         <p>Bobaljik, Jonathan D. 2012. <em>Universals in Comparative Morphology</em>. Cambridge, MA: MIT Press.</p>
