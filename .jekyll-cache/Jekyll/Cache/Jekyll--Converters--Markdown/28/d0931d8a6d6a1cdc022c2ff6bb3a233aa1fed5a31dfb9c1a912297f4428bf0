@@ -1,0 +1,158 @@
+I"�><p>With revealjs outlined in a <a href="/2020/01/11/revealjs-for-linguistics-part-2-basic-presentations/">previous post</a>, with its pros and cons outlined there, now I will outline how to build a basic slideshow.
+This is written for people unfamiliar with html and css, and contains only 
+If you are comfortable with these, then this doesn’t add much that you can’t figure out from the <a href="https://revealjs.com/#/">demo</a>.
+In general, the demo is the good place to start, this guide is for those creating an academic talk and want an easy point of entry.</p>
+
+<p><strong>Note</strong>: This is not exahustive, and will be updated regularly.</p>
+
+<h2 id="installation">Installation</h2>
+
+<p>In order to use reveal.js, you need to download the source files at the <a href="https://github.com/hakimel/reveal.js/">Gihhub repository</a>.
+If you have a github account already, you can fork the repo or download the source files,a nd to get started quickly, edit the <code class="highlighter-rouge">index.html</code> file.</p>
+
+<h2 id="basic-elements">Basic elements</h2>
+
+<ul>
+  <li>Slides are contained within <code class="highlighter-rouge">&lt;section&gt;...&lt;/section&gt;</code> tags.</li>
+  <li><code class="highlighter-rouge">&lt;section&gt;</code> elements can be nested, in which case you create a vertical slide underneath the current one. This is useful when you have an after-point to the current slide, or you want to contain all slides underneath sections (like a paper).</li>
+  <li>Unordered lists are created with <code class="highlighter-rouge">&lt;ul&gt;...&lt;/ul&gt;</code></li>
+  <li>Ordered list are created with <code class="highlighter-rouge">&lt;ol&gt;...&lt;/ol&gt;</code></li>
+  <li>In both list types, <code class="highlighter-rouge">&lt;li&gt;...&lt;/li&gt;</code> introduce list elements.</li>
+</ul>
+
+<h2 id="incremental-reveal">Incremental reveal</h2>
+
+<ul>
+  <li>Incremental uncover of elements is handled by putting <code class="highlighter-rouge">class="fragment"</code> within the elements:</li>
+</ul>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ul&gt;</span>
+  <span class="nt">&lt;li&gt;</span>This is an unordered list.<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"fragment"</span><span class="nt">&gt;</span>This element will be uncovered by advancing the presentation<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"fragment"</span><span class="nt">&gt;</span>And then this one will<span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>You can specify the order of increments by providing a <code class="highlighter-rouge">data-fragment-index</code> value:</li>
+</ul>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ul&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"fragment"</span> <span class="na">data-fragment-index=</span><span class="s">"3"</span><span class="nt">&gt;</span>This element will be the third uncovered.<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"fragment"</span> <span class="na">data-fragment-index=</span><span class="s">"1"</span><span class="nt">&gt;</span>This element will be the first uncovered.<span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"fragment"</span> <span class="na">data-fragment-index=</span><span class="s">"2"</span><span class="nt">&gt;</span>This element will be the second uncovered.<span class="nt">&lt;/ul&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</code></pre></div></div>
+
+<h2 id="making-multiple-columns">Making multiple columns</h2>
+
+<p>You can make multiple columns using css flex.
+A good guide to flex can be found <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">here</a>.
+Enough to get going should be the following css:</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.columnscontainer</span> <span class="p">{</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+    <span class="nl">justify-content</span><span class="p">:</span> <span class="n">space-between</span><span class="p">;</span>
+    <span class="c">/* align-items: baseline; */</span>
+  <span class="p">}</span>
+
+<span class="nc">.containerbaseline</span><span class="p">{</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+    <span class="nl">justify-content</span><span class="p">:</span> <span class="n">space-between</span><span class="p">;</span>
+    <span class="nl">align-items</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="nc">.col</span> <span class="p">{</span>
+    <span class="nl">flex</span><span class="p">:</span> <span class="m">1</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="nc">.colgrow</span> <span class="p">{</span>
+    <span class="nl">flex</span><span class="p">:</span> <span class="m">2</span><span class="p">;</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<p>And then use as follows:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"columnscontainer"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;p&gt;</span>This will be in the first column<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;p&gt;</span>This will be in the second column.<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<h2 id="linguistic-examples">Linguistic Examples</h2>
+
+<p>In order to put lingusitic examples in, see the guide at <a href="https://github.com/pwsmith/htmlex">htmlex</a>.
+Short version: include the css file in that repo in your header, and then lay out the examples as follows.
+The following is for non-glossed examples:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"example-container"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"individual-example"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"example-number"</span><span class="nt">&gt;&lt;p</span> <span class="na">class=</span><span class="s">'ex'</span><span class="nt">&gt;&lt;/p&gt;&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"ab-counter"</span><span class="nt">&gt;&lt;p</span> <span class="na">class=</span><span class="s">'ab'</span><span class="nt">&gt;&lt;/p&gt;&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"judgement"</span><span class="nt">&gt;&lt;p&gt;&lt;/p&gt;&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"example-sentence"</span><span class="nt">&gt;&lt;p&gt;</span>That's not my duck.<span class="nt">&lt;/p&gt;&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"individual-example"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"example-number"</span><span class="nt">&gt;&lt;p&gt;&lt;/p&gt;&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"ab-counter"</span><span class="nt">&gt;&lt;p</span> <span class="na">class=</span><span class="s">'ab'</span><span class="nt">&gt;&lt;/p&gt;&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"judgement"</span><span class="nt">&gt;&lt;p&gt;</span>#<span class="nt">&lt;/p&gt;&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"example-sentence"</span><span class="nt">&gt;&lt;p&gt;</span>It's beak is too shiny.<span class="nt">&lt;/p&gt;&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<p>And for an example that needs glosses:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"gloss-example-container"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">'gloss-individual-example'</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">'example-number'</span><span class="nt">&gt;&lt;p</span> <span class="na">class=</span><span class="s">'ex'</span><span class="nt">&gt;&lt;/p&gt;&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">'judgement'</span><span class="nt">&gt;&lt;p&gt;</span>#<span class="nt">&lt;/p&gt;&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">'gloss-example'</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">'sentence'</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"gloss-individual-word"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">'word'</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"target-word"</span><span class="nt">&gt;</span>Ik<span class="nt">&lt;/li&gt;</span>
+                        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"target-gloss"</span><span class="nt">&gt;</span>I.<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">'smallcaps'</span><span class="nt">&gt;</span>nom<span class="nt">&lt;/span&gt;&lt;/li&gt;</span>
+                    <span class="nt">&lt;/ol&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"gloss-individual-word"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">'word'</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"target-word"</span><span class="nt">&gt;</span>zag<span class="nt">&lt;/li&gt;</span>
+                        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"target-gloss"</span><span class="nt">&gt;</span>see.<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">'smallcaps'</span><span class="nt">&gt;</span>past<span class="nt">&lt;/span&gt;&lt;/li&gt;</span>
+                    <span class="nt">&lt;/ol&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"gloss-individual-word"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">'word'</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"target-word"</span><span class="nt">&gt;</span>twee<span class="nt">&lt;/li&gt;</span>
+                        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"target-gloss"</span><span class="nt">&gt;</span>two<span class="nt">&lt;/li&gt;</span>
+                    <span class="nt">&lt;/ol&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"gloss-individual-word"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">'word'</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"target-word"</span><span class="nt">&gt;</span>ber-en,<span class="nt">&lt;/li&gt;</span>
+                        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"target-gloss"</span><span class="nt">&gt;</span>bear-<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">'smallcaps'</span><span class="nt">&gt;</span>pl<span class="nt">&lt;/span&gt;&lt;/li&gt;</span>
+                    <span class="nt">&lt;/ol&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"gloss-individual-word"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">'word'</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"target-word"</span><span class="nt">&gt;</span>brood-je-s<span class="nt">&lt;/li&gt;</span>
+                        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"target-gloss"</span><span class="nt">&gt;</span>bread-<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">'smallcaps'</span><span class="nt">&gt;</span>dim-pl<span class="nt">&lt;/span&gt;&lt;/li&gt;</span>
+                    <span class="nt">&lt;/ol&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"gloss-individual-word"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;ol</span> <span class="na">class=</span><span class="s">'word'</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"target-word"</span><span class="nt">&gt;</span>smer-en<span class="nt">&lt;/li&gt;</span>
+                        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"target-gloss"</span><span class="nt">&gt;</span>spread-<span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">'smallcaps'</span><span class="nt">&gt;</span>inf<span class="nt">&lt;/span&gt;&lt;/li&gt;</span>
+                    <span class="nt">&lt;/ol&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+            <span class="nt">&lt;/ol&gt;</span>
+            <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">'translation'</span><span class="nt">&gt;</span>'I saw two bears, spreading on sandwiches.'<span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+:ET
