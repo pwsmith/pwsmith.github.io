@@ -55,7 +55,7 @@ Once you have forked the repo from github, open the directory in whatever text e
 The forked repository contains a number of demo files that you can alter.
 Within the `index.html` file, delete everything between the `<div class="slides">...</div>` and insert the following:
 
-```
+```html
 <section data-markdown="example.md"
          data-separator="^\n\n\n"
          data-separator-vertical="^\n\n"
@@ -74,7 +74,7 @@ Certain variables are defined in the above code.
 `^\n\n\n` here means three blank lines delimit a slide.
 So, the following will produce two slides, because of the three blank lines between the first slide's content and the heading of the second slide:
 
-```
+```markdown
 # First slide
 
 Content of first slide
@@ -88,7 +88,7 @@ Content of first slide
 `data-separator-vertical` refers to how a vertical slide is defined.
 Here, `^\n\n` means that two blank lines will embed a vertical slide.
 
-```
+```markdown
 # First slide
 
 First slide content
@@ -108,7 +108,7 @@ However, I find using blank lines to be difficult to see and judge.
 Luckily, you can change the delimiters, to get something that works for you.
 For instance, with the following, you will begin a nested vertical slide when a new line starts (indicated by '^') with a sequence of three hyphens and a new horizontal slide when a new line starts wtih with a sequence of five hyphens.
 
-```
+```html
 <section data-markdown="example.md"
          data-separator="^-----"
          data-separator-vertical="^---"
@@ -117,7 +117,7 @@ For instance, with the following, you will begin a nested vertical slide when a 
 </section>
 ``` 
 
-```
+```markdown
 # First slide
 
 Here is some content
@@ -292,7 +292,7 @@ This is not such a problem, and is relatively quick, but it is still a disruptio
 
 If you use pandoc and you decide you'd rather your output be a beamer presentation rather than reveal.js, then assuming there is not too much cutsom css/html in your source code, then use the following command:
 
-```{bash}
+```shell
 pandoc -t beamer INPUTFILE.md -o OUTPUTFILE.pdf
 ```
 
