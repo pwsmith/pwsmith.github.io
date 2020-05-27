@@ -1,0 +1,258 @@
+I"�><h2 id="what-is-markdown">What is Markdown</h2>
+
+<p>Markdown is a markdown language that uses an extremely simple syntax, which then gets formatted correctly in the output. 
+The writer writes the files in plain text, and uses special tags for simple formatting.
+For instance enclosing text in asterisks will render as italics in the output: <code class="highlighter-rouge">*in the source code, this block is enclosed with italics*</code> will yield <em>in the source code, this block is enclosed with italics</em>.
+Enclosing text in <code class="highlighter-rouge">**double asterisks**</code> will output as <strong>boldface</strong>
+Similarly, writing the following:</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">-</span> Some sentence here.
+<span class="p">-</span> Another here.
+<span class="p">-</span> And another here.
+</code></pre></div></div>
+
+<p>will yield a bulleted list:</p>
+
+<ul>
+  <li>Some sentence here.</li>
+  <li>Another here.</li>
+  <li>And another here.</li>
+</ul>
+
+<p>Markdown is increasingly being used in many many ways, such as blogging: this post is written in markdown for instance.
+It has the advantage of being very simple to write, having a lot of support in applications that are based in plain text, as well as the added bonus that the source files are very easy to read.
+Markdown compares very favourably in this regard to, for isstance, text that is written for LaTeX processing.</p>
+
+<p>Using markdown, it is very easy to write slide shows, handling most of the general formatting you need for your slides.
+Although reveal.js is a framework that at its most basic uses .html input, it works very well with reveal.js, making it very easy to quickly create slide shows.</p>
+
+<p>There are in fact two ways in which one can write the source file in Markdown for use with a reveal slide deck, and I will discuss each in turn here.
+Each has benefits and drawbacks, which I’ll try to highlight.</p>
+
+<h2 id="method-1-embedding-a-markdown-file-in-the-main-html-document">Method 1: Embedding a markdown file in the main html document</h2>
+
+<p>The first method calls a file written in markdown from the main html document.</p>
+
+<h3 id="prerequisites">Prerequisites</h3>
+
+<p>In order to use this method you need to:</p>
+
+<ol>
+  <li>Install <a href="https://nodejs.org">Node.js</a> (<strong>Note:</strong> I <em>strongly</em> recommend doing this with <a href="https://github.com/nvm-sh/nvm">nvm</a>).</li>
+  <li>Fork the reveal.js repository from <a href="https://github.com/hakimel/reveal.js/">Github</a></li>
+</ol>
+
+<h3 id="making-the-slides">Making the slides</h3>
+
+<p>Once you have forked the repo from github, open the directory in whatever text editor you like (<a href="https://code.visualstudio.com/">Visual Studio Code</a> is a good one for this).
+The forked repository contains a number of demo files that you can alter.
+Within the <code class="highlighter-rouge">index.html</code> file, delete everything between the <code class="highlighter-rouge">&lt;div class="slides"&gt;...&lt;/div&gt;</code> and insert the following:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;section data-markdown="example.md"
+         data-separator="^\n\n\n"
+         data-separator-vertical="^\n\n"
+         data-separator-notes="^Note:"
+         data-charset="utf-8"&gt;
+&lt;/section&gt;
+</code></pre></div></div>
+
+<p>Then, create a file within the same level as <code class="highlighter-rouge">demo.html</code> (or alter the path of <code class="highlighter-rouge">data-markdown</code> accordingly), and write your slides.
+The file name should match whatever value is given for <code class="highlighter-rouge">data-markdown</code> in the above code, and should have the extension <em>.md</em>.</p>
+
+<p>Certain variables are defined in the above code.
+<code class="highlighter-rouge">data-separator-notes</code> refers to what sequence of characters will start a note (for using speaker notes).
+<code class="highlighter-rouge">data-separator</code> refers to what separates slides.
+<code class="highlighter-rouge">^\n\n\n</code> here means three blank lines delimit a slide.
+So, the following will produce two slides, because of the three blank lines between the first slide’s content and the heading of the second slide:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># First slide
+
+Content of first slide
+
+
+
+# Second slide
+
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">data-separator-vertical</code> refers to how a vertical slide is defined.
+Here, <code class="highlighter-rouge">^\n\n</code> means that two blank lines will embed a vertical slide.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># First slide
+
+First slide content
+
+
+Content on slide nested under first slide
+
+
+
+# Second slide
+
+Second slide content
+</code></pre></div></div>
+
+<p>This is the example given in the user guide.
+However, I find using blank lines to be difficult to see and judge.
+Luckily, you can change the delimiters, to get something that works for you.
+For instance, with the following, you will begin a nested vertical slide when a new line starts (indicated by ‘^’) with a sequence of three hyphens and a new horizontal slide when a new line starts wtih with a sequence of five hyphens.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;section data-markdown="example.md"
+         data-separator="^-----"
+         data-separator-vertical="^---"
+         data-separator-notes="^Note:"
+         data-charset="UTF-8"&gt;
+&lt;/section&gt;
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># First slide
+
+Here is some content
+---
+This will start a nested slide
+-----
+# Second slide
+
+Here is some content --- note that the sequnce of three dashes here will **not** start a nested slide, since they do not start a line.
+
+So don't worry, fans of LaTeX em-dash :)
+---
+In contrast to the above, which will ensure that this is on a nested slide.
+</code></pre></div></div>
+
+<p>Markdown syntax is very easy and very readable, however, you will most likely want some flexibility in customisation.
+You can add in attributes to elements using css comments.
+So, the following will assign the class “green” to the text.
+Thus, whatever you style “green” as in a linked css file, it will appear as such.</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Here is some text. <span class="c">&lt;!-- .element: class="green" --&gt;</span>
+</code></pre></div></div>
+
+<p>Whilst this method works, it is at times a little imprecise.
+So, you can also, when you need interleave html with inline css code throughout the markdown, and it will still render correctly.
+Thus, below is equivalent to the above:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;p</span> <span class="na">style:</span> <span class="na">class=</span><span class="s">"green"</span><span class="nt">&gt;</span>Here is some text.<span class="nt">&lt;/p&gt;</span>
+</code></pre></div></div>
+
+<h3 id="viewing-the-slides">Viewing the slides</h3>
+
+<p>Normally with reveal.js presentations, you can simply open the file in a web browser and it will render correctly. 
+However, note that using the method of an external markdown file, in order to actually view your slides, you need to run them on a local web server.
+Navigate to the <code class="highlighter-rouge">reveal.js</code> directory and run the following commands:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm <span class="nb">install</span>
+<span class="nv">$ </span>npm start
+</code></pre></div></div>
+
+<p>Assuming that npm installs all the relevant packages correctly, then you will be able to view your slides at <code class="highlighter-rouge">http://localhost:8000</code>.</p>
+
+<h3 id="positives">Positives</h3>
+
+<p>The major benefit of using this method is that you can write with markdown and the result is immediately available.
+In fact, once you run <code class="highlighter-rouge">npm start</code>, the slides will render as you save the document, meaning you can see them online as you type.
+This is a big positive over the pandoc method described below, which requires you to compile them each time.
+Secondly, your code is flexible: you can define whatever separators for the slides you want, so you can make it readable to yourself in whatever way works for you.</p>
+
+<h3 id="negatives">Negatives</h3>
+
+<p>One of the biggest disadvantages to this is that you need all the additional software to see the slides. 
+If you stick to projecting from your local computer, it’s not a problem, however, if you need to use a different one, then you need to hope that it has Node.js installed, and hope it’s a compatible version.
+There’s testing your slides in advance of your talk at a conference, and then there’s this.</p>
+
+<p>Secondly, this method does require some extra software.
+Once you run <code class="highlighter-rouge">npm install</code>, the installed <code class="highlighter-rouge">node_modules</code> gets very big, around 400mb.
+As a one-off, this is fine, but if you want multiple different reveal.js directories, your hard drive will fill up fast.</p>
+
+<h2 id="method-2-using-pandoc">Method 2: Using pandoc</h2>
+
+<p>It is also possible to use <a href="https://pandoc.org">pandoc</a>,  which is freely available, cross-platform document conversion software.</p>
+
+<h3 id="prerequisites-1">Prerequisites</h3>
+
+<p>There are detailed instructions on how to install pandoc <a href="https://pandoc.org/installing.html">here</a></p>
+
+<p>If you install from a package manager, be sure to check that the version is at least 2.5 or higher.</p>
+
+<p>Pandoc is a command line utility that is able to convert text files between a number of formats and into a variety of outputs. 
+For our purposes, it is able to convert a markdown file into a hmtl file with all the necessary reveal.js boilerplate.
+<strong>Important</strong>: you still need to download or clone the reveal.js repository and place the pandoc output in the right place.</p>
+
+<h3 id="basic-use">Basic use</h3>
+
+<p>To create a simple slide deck, write the content in markdown.
+The metadata, such as title, author and date should go in the following format in the top lines of the file:</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s">Hello</span>
+<span class="na">author</span><span class="pi">:</span> <span class="s">Peter</span>
+<span class="na">date</span><span class="pi">:</span> <span class="s">May 26th </span><span class="m">2020</span>
+<span class="nn">---</span>
+</code></pre></div></div>
+<p>Then, in a terminal window run the following, substituting the capital letters for your relevant file names:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pandoc <span class="nt">-t</span> revealjs INPUTFILE.md <span class="nt">-s</span> <span class="nt">-o</span> OUTPUTFILE.html
+</code></pre></div></div>
+
+<p>If you want bullet points to be uncovered one by one, then include the option -i (for incremental):</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pandoc <span class="nt">-t</span> revealjs INPUTFILE.md <span class="nt">-s</span> <span class="nt">-i</span> <span class="nt">-o</span> OUTPUTFILE.html
+</code></pre></div></div>
+
+<p>The output of this command will be a file with all the necessary reveal.js boilerplate, and your markdown file converted into HTML.
+The file should then be placed in a position where the links to the relevant reveal.js files can be located.
+By default, this is the directory <strong>above</strong> the reveal.js you cloned earlier.</p>
+
+<h2 id="customisations">Customisations</h2>
+
+<p>Whilst the above will create a fully functioning reveal.js slide deck, you may wish to customise it further.
+For instance, the default theme is the ‘black’ theme, but can be changed in the following way:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">-V</span> <span class="nv">theme</span><span class="o">=</span><span class="nv">$THEMENAME</span>
+</code></pre></div></div>
+
+<p>Any of the variables that can be set in the configuration of reveal.js can be tweaked this way. 
+For instance, if you wish to change the transition speed and use the beige theme, you can use:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pandoc <span class="nt">-t</span> revealjs INPUTFILE.md <span class="nt">-s</span> <span class="nt">-i</span> <span class="nt">-o</span> OUTPUTFILE.html <span class="nt">-V</span> <span class="nv">theme</span><span class="o">=</span>beige <span class="nt">-V</span> <span class="nv">transitionSpeed</span><span class="o">=</span>fast
+</code></pre></div></div>
+
+<p>Citations can be added using regular markdown citation syntax, and running with the <code class="highlighter-rouge">--filter  pandoc-citeproc</code> option.
+Note that you should then specify the path to the bibliography in the metadata of your markdown file.
+For instance:</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s">Hello</span>
+<span class="na">author</span><span class="pi">:</span> <span class="s">Peter</span>
+<span class="na">date</span><span class="pi">:</span> <span class="s">today</span>
+<span class="na">bibliography</span><span class="pi">:</span> <span class="s">/path/to/your/bibliography</span>
+<span class="nn">---</span>
+...
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pandoc <span class="nt">-t</span> revealjs <span class="nt">--filter</span> pandoc-citeproc INPUTFILE.md <span class="nt">-s</span> <span class="nt">-o</span> OUTPUTFILE.html
+</code></pre></div></div>
+
+<p>Finally, trees can be added in as an image file.
+There may be ways to first run them through latex to output them as an image file automatically (see a discussion from Pavel Iosad <a href="https://www.anghyflawn.net/blog/2014/teaching-slides-with-pandoc-and-reveal-js/">here</a>, so it is possible to do it like this.</p>
+
+<p>As with the other markdown option above, when it comes to presenting you need a reveal.js installation on the presentation computer.
+In this case it is easier as, if you are using a different computer to your own, all you need to do is copy the root directory of your sildes.
+That is, there is no need to install npm modules so it is more lightweight than the other option.</p>
+
+<h3 id="negatives-1">Negatives</h3>
+
+<p>Probably the biggest drawback of using pandoc and markdown is that there is no live update as you are working.
+So, you must compile the slides each time you want to see changes, or read the source code.
+This is not such a problem, and is relatively quick, but it is still a disruption if you like seeing the output to check as you go along.</p>
+
+<h3 id="postscript">Postscript</h3>
+
+<p>If you use pandoc and you decide you’d rather your output be a beamer presentation rather than reveal.js, then assuming there is not too much cutsom css/html in your source code, then use the following command:</p>
+
+<pre><code class="language-{bash}">pandoc -t beamer INPUTFILE.md -o OUTPUTFILE.pdf
+</code></pre>
+
+<p>and you have the slides in beamer instead, nice!
+<strong>Note, for this, you need LaTeX installed on your system.</strong></p>
+:ET
