@@ -1,4 +1,4 @@
-I"�?<h2 id="what-is-markdown">What is Markdown</h2>
+I"?F<h2 id="what-is-markdown">What is Markdown</h2>
 
 <p>Markdown is a markdown language that uses an extremely simple syntax, which then gets formatted correctly in the output. 
 The writer writes the files in plain text, and uses special tags for simple formatting.
@@ -48,12 +48,12 @@ Each has benefits and drawbacks, which I’ll try to highlight.</p>
 The forked repository contains a number of demo files that you can alter.
 Within the <code class="highlighter-rouge">index.html</code> file, delete everything between the <code class="highlighter-rouge">&lt;div class="slides"&gt;...&lt;/div&gt;</code> and insert the following:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;section data-markdown="example.md"
-         data-separator="^\n\n\n"
-         data-separator-vertical="^\n\n"
-         data-separator-notes="^Note:"
-         data-charset="utf-8"&gt;
-&lt;/section&gt;
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;section</span> <span class="na">data-markdown=</span><span class="s">"example.md"</span>
+         <span class="na">data-separator=</span><span class="s">"^\n\n\n"</span>
+         <span class="na">data-separator-vertical=</span><span class="s">"^\n\n"</span>
+         <span class="na">data-separator-notes=</span><span class="s">"^Note:"</span>
+         <span class="na">data-charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/section&gt;</span>
 </code></pre></div></div>
 
 <p>Then, create a file within the same level as <code class="highlighter-rouge">demo.html</code> (or alter the path of <code class="highlighter-rouge">data-markdown</code> accordingly), and write your slides.
@@ -65,29 +65,29 @@ The file name should match whatever value is given for <code class="highlighter-
 <code class="highlighter-rouge">^\n\n\n</code> here means three blank lines delimit a slide.
 So, the following will produce two slides, because of the three blank lines between the first slide’s content and the heading of the second slide:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># First slide
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># First slide</span>
 
-Content of first slide
+Content of first slide<span class="sb">
 
 
 
-# Second slide
+</span><span class="gh"># Second slide</span>
 
 </code></pre></div></div>
 
 <p><code class="highlighter-rouge">data-separator-vertical</code> refers to how a vertical slide is defined.
 Here, <code class="highlighter-rouge">^\n\n</code> means that two blank lines will embed a vertical slide.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># First slide
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># First slide</span>
 
-First slide content
-
-
-Content on slide nested under first slide
+First slide content<span class="sb">
 
 
+</span>Content on slide nested under first slide<span class="sb">
 
-# Second slide
+
+
+</span><span class="gh"># Second slide</span>
 
 Second slide content
 </code></pre></div></div>
@@ -97,27 +97,27 @@ However, I find using blank lines to be difficult to see and judge.
 Luckily, you can change the delimiters, to get something that works for you.
 For instance, with the following, you will begin a nested vertical slide when a new line starts (indicated by ‘^’) with a sequence of three hyphens and a new horizontal slide when a new line starts wtih with a sequence of five hyphens.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;section data-markdown="example.md"
-         data-separator="^-----"
-         data-separator-vertical="^---"
-         data-separator-notes="^Note:"
-         data-charset="UTF-8"&gt;
-&lt;/section&gt;
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;section</span> <span class="na">data-markdown=</span><span class="s">"example.md"</span>
+         <span class="na">data-separator=</span><span class="s">"^-----"</span>
+         <span class="na">data-separator-vertical=</span><span class="s">"^---"</span>
+         <span class="na">data-separator-notes=</span><span class="s">"^Note:"</span>
+         <span class="na">data-charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/section&gt;</span>
 </code></pre></div></div>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># First slide
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># First slide</span>
 
-Here is some content
+<span class="gh">Here is some content
 ---
 This will start a nested slide
 -----
-# Second slide
+# Second slide</span>
 
-Here is some content --- note that the sequnce of three dashes here will **not** start a nested slide, since they do not start a line.
+Here is some content --- note that the sequnce of three dashes here will <span class="gs">**not**</span> start a nested slide, since they do not start a line.
 
-So don't worry, fans of LaTeX em-dash :)
+<span class="gh">So don't worry, fans of LaTeX em-dash :)
 ---
-In contrast to the above, which will ensure that this is on a nested slide.
+</span>In contrast to the above, which will ensure that this is on a nested slide.
 </code></pre></div></div>
 
 <p>Markdown syntax is very easy and very readable, however, you will most likely want some flexibility in customisation.
@@ -145,7 +145,7 @@ Navigate to the <code class="highlighter-rouge">reveal.js</code> directory and r
 <span class="nv">$ </span>npm start
 </code></pre></div></div>
 
-<p>Assuming that npm installs all the relevant packages correctly, then you will be able to view your slides at <code class="highlighter-rouge">http://localhost:8000</code>.<sup id="fnref:normalway"><a href="#fn:normalway" class="footnote">1</a></sup></p>
+<p>Assuming that npm installs all the relevant packages correctly, then you will be able to view your slides at <code class="highlighter-rouge">http://localhost:8000</code>.<sup id="fnref:normalway"><a href="#fn:normalway" class="footnote">1</a></sup>.</p>
 
 <h3 id="positives">Positives</h3>
 
@@ -161,12 +161,14 @@ If you stick to projecting from your local computer, it’s not a problem, howev
 There’s testing your slides in advance of your talk at a conference, and then there’s this.</p>
 
 <p>Secondly, this method does require some extra software.
-Once you run <code class="highlighter-rouge">npm install</code>, the installed <code class="highlighter-rouge">node_modules</code> gets very big, around 400mb.
+Once you run <code class="highlighter-rouge">npm install</code>, the installed <code class="highlighter-rouge">node_modules</code> directory gets very big, around 400mb.
 As a one-off, this is fine, but if you want multiple different reveal.js directories, your hard drive will fill up fast.</p>
 
 <h2 id="method-2-using-pandoc">Method 2: Using pandoc</h2>
 
-<p>It is also possible to use <a href="https://pandoc.org">pandoc</a>,  which is freely available, cross-platform document conversion software.</p>
+<p>It is also possible to use <a href="https://pandoc.org">pandoc</a>,  which is freely available, cross-platform document conversion software.
+Pandoc is a command line utility that is able to convert text files between a number of formats and into a variety of outputs. 
+For our purposes, it is able to convert a markdown file into a hmtl file with all the necessary reveal.js boilerplate.</p>
 
 <h3 id="prerequisites-1">Prerequisites</h3>
 
@@ -174,9 +176,7 @@ As a one-off, this is fine, but if you want multiple different reveal.js directo
 
 <p>If you install from a package manager, be sure to check that the version is at least 2.5 or higher.</p>
 
-<p>Pandoc is a command line utility that is able to convert text files between a number of formats and into a variety of outputs. 
-For our purposes, it is able to convert a markdown file into a hmtl file with all the necessary reveal.js boilerplate.
-<strong>Important</strong>: you still need to download or clone the reveal.js repository and place the pandoc output in the right place.</p>
+<p><strong>Important</strong>: you still need to download or clone the reveal.js repository and place the pandoc output in the right place.</p>
 
 <h3 id="basic-use">Basic use</h3>
 
@@ -188,6 +188,19 @@ The metadata, such as title, author and date should go in the following format i
 <span class="na">author</span><span class="pi">:</span> <span class="s">Peter</span>
 <span class="na">date</span><span class="pi">:</span> <span class="s">May 26th </span><span class="m">2020</span>
 <span class="nn">---</span>
+
+<span class="gh"># Here is the first slide</span>
+<span class="p">
+-</span> The first bullet point.
+<span class="p">-</span> The second one.
+<span class="p">-</span> And the third.
+
+<span class="gh"># This will start a new slide.</span>
+<span class="p">
+-</span> New bullet point.
+<span class="p">-</span> etc.
+<span class="p">-</span> etc.
+
 </code></pre></div></div>
 <p>Then, in a terminal window run the following, substituting the capital letters for your relevant file names:</p>
 
@@ -227,14 +240,16 @@ For instance:</p>
 <span class="na">date</span><span class="pi">:</span> <span class="s">today</span>
 <span class="na">bibliography</span><span class="pi">:</span> <span class="s">/path/to/your/bibliography</span>
 <span class="nn">---</span>
-...
+
+@moskal2015 shows that case suppletion is unattested in lexical nouns but is attested in pronouns.
+
 </code></pre></div></div>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pandoc <span class="nt">-t</span> revealjs <span class="nt">--filter</span> pandoc-citeproc INPUTFILE.md <span class="nt">-s</span> <span class="nt">-o</span> OUTPUTFILE.html
 </code></pre></div></div>
 
 <p>Finally, trees can be added in as an image file.
-There may be ways to first run them through latex to output them as an image file automatically (see a discussion from Pavel Iosad <a href="https://www.anghyflawn.net/blog/2014/teaching-slides-with-pandoc-and-reveal-js/">here</a>, so it is possible to do it like this.</p>
+There may be ways to first run them through latex to output them as an image file automatically (see a discussion from Pavel Iosad <a href="https://www.anghyflawn.net/blog/2014/teaching-slides-with-pandoc-and-reveal-js/">here</a>), so it is possible to do it like this.</p>
 
 <p>As with the other markdown option above, when it comes to presenting you need a reveal.js installation on the presentation computer.
 In this case it is easier as, if you are using a different computer to your own, all you need to do is copy the root directory of your sildes.
@@ -250,15 +265,15 @@ This is not such a problem, and is relatively quick, but it is still a disruptio
 
 <p>If you use pandoc and you decide you’d rather your output be a beamer presentation rather than reveal.js, then assuming there is not too much cutsom css/html in your source code, then use the following command:</p>
 
-<pre><code class="language-{bash}">pandoc -t beamer INPUTFILE.md -o OUTPUTFILE.pdf
-</code></pre>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pandoc <span class="nt">-t</span> beamer INPUTFILE.md <span class="nt">-o</span> OUTPUTFILE.pdf
+</code></pre></div></div>
 
 <p>and you have the slides in beamer instead, nice!
 <strong>Note, for this, you need LaTeX installed on your system.</strong></p>
 <div class="footnotes">
   <ol>
     <li id="fn:normalway">
-      <p>You can also <a href="#fnref:normalway" class="reversefootnote">&#8617;</a></p>
+      <p>You can also run these commands when you are writing your slides in html, and use the live preview to automatically update them when you save the file. <a href="#fnref:normalway" class="reversefootnote">&#8617;</a></p>
     </li>
   </ol>
 </div>

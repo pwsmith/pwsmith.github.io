@@ -1,0 +1,256 @@
+I"6U<h2 id="why">Why?</h2>
+
+<p>When you install LaTeX on your system the installation often comes with an editor.
+For Mac, the one bundled is TexShop, and in Windows TexWorks.
+For Linux, none is specifically included, as there generally already exist text editors within the Linux distribution, though which one differs from distribution to distribution.
+Fundamentally, all one needs to use Linux is any text editor: as the website says, no TeX specific editor is necessary.</p>
+
+<p>However, if you are going to write in LaTeX a lot, and you will if you use it as an academic, then taking the time to set up and learn to use a good text editor is a really good investement.
+In the long run, it will save you time, give you a comfortable environment and make the writing process a lot easier.
+In this article I’ll look at some of the advantages, and then show how <a href="https://atom.io">Atom</a> can be set up for using LaTeX.
+In future articles, I’ll also show how to set up <a href="https://code.visualstudio.com/">Visual Studio Code</a>, <a href="https://neovim.io/">Neovim</a> and <a href="https://www.sublimetext.com/">Sublime Text</a>.</p>
+
+<h3 id="what-to-look-for-in-a-good-text-editor">What to look for in a good text editor</h3>
+
+<ul>
+  <li>Customisability.
+    <ul>
+      <li>Such as the ability to quickly change the look of the editor. Looking at the screen the whole time, you may want to change the look of things a bit, for instance using a different colour scheme depending on whether you are in a dark or light room, or just for shits and giggles.</li>
+    </ul>
+  </li>
+  <li>Code snippets
+    <ul>
+      <li>I love using LaTeX to write papers, but I hate writing LaTeX. The markup, though often clear, is very verbose and annoying to type out in full. Writing the boilerplate for itemised lists <code class="highlighter-rouge">\begin{itemize} \item ... \end{itemize}</code> gets really irritating quickly when using them a lot, for instance in beamer. Snippets allow you to insert pieces of code with just a few keystrokes, saving the repitition.  The ability to easily use and define your own snippets is an absolute must.</li>
+    </ul>
+  </li>
+  <li>Ability to integrate bibliography.
+    <ul>
+      <li>My bibliography file has thousands of entries in, each with a unique citation key. Remembering these can be tough. I save them by author-year (eg. <code class="highlighter-rouge">moskal2018</code>), but for authors who have published multiple articles in one year, then you have to use another key. To avoid having to look them up, some text editors have a search and autocomplete function that is triggered when you type <code class="highlighter-rouge">\cite{}</code>, which will then allow you to look up entries by keywords, such as author, year, title of paper etc and it will then insert the correct citation key.</li>
+    </ul>
+  </li>
+  <li>Cross-platform
+    <ul>
+      <li>Avoids you getting tied into one platform. This is optional, but I don’t like the idea of being tied into one ecosystem. In my time as an academic I started off using Windows, switched quickly to Mac and now for the last few years use Linux. Having the same set up for writing over different systems can help, especially if your home work set up is different to one you use at work.</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="atom">Atom</h2>
+
+<p>Atom is developed by Github, which is in turn owned by Microsoft.
+It is described as ‘‘A hackable text editor for the 21st Century’’.
+It has a large, if declining, community of people who develop for it.
+It is free, and open source. 
+So, you don’t have to pay anything to use it and if you are so inclined, can modify it for yourself or develop your own add ons.</p>
+
+<h3 id="installation">Installation</h3>
+
+<p>Installing is easy. 
+Simply go to <a href="https://atom.io">the homepage</a> and the relevant installation file will be displayed.
+It can also be installed from various package managers on Linux, as well as <a href="https://brew.sh/">Homebrew</a> on Mac and <a href="https://chocolatey.org/">Chocolatey</a> on Windows.</p>
+
+<p><img src="/images/atomsu/homepage.png" alt="pic" />
+<em>Getting to the homepage from Linux.</em></p>
+
+<p>After installation you have a working text editor. Time to set it up for LaTeX.</p>
+
+<p><strong>Note that Atom does not provide LaTeX itself, which needs to be <a href="https://www.latex-project.org/get/">installed</a> on your system as well.</strong></p>
+
+<h3 id="installing-latex-support">Installing LaTeX support</h3>
+
+<p>Atom is built to be customised, and you can install modular packages to aid your workflow in a particular language.
+For instance, there are many packages specific to editing html, python, markdown <em>etc. etc.</em>
+These will provide various aids, such as syntax highlighting, language-specific snippets, keyboard shortcuts and more.</p>
+
+<p>Packages can be installed through the settings menu, which can be accessed via <code class="highlighter-rouge">edit -&gt; preferences</code> or using the shortcut <code class="highlighter-rouge">C+,</code>.
+<code class="highlighter-rouge">C</code> here refers to the control key, so <code class="highlighter-rouge">ctrl</code> on linux/windows and <code class="highlighter-rouge">cmd</code> on mac.
+You should then read <code class="highlighter-rouge">C+,</code> as ‘press <code class="highlighter-rouge">ctrl</code> and <code class="highlighter-rouge">,</code> together.
+Once there, click on the <code class="highlighter-rouge">install</code> tab at the side and it brings up a dialogue to search for new packages.<sup id="fnref:apm"><a href="#fn:apm" class="footnote">1</a></sup></p>
+
+<p><img src="/images/atomsu/atominstall.png" alt="Installation Menu" />
+<em>Settings menu with install sub-menu highlighted.</em></p>
+
+<p>The following are what I like to use for writing LaTeX when using Atom. 
+This is not a complete list of what is available, but the set up I prefer to use within Atom.</p>
+
+<h4 id="language-latex">language-latex</h4>
+
+<p><a href="https://atom.io/packages/language-latex">language-latex</a> is the package that adds language support to Atom.
+It gives syntax highlighting to make your text easier to read in plain text and defines a number of snippets.</p>
+
+<h4 id="latextools">latextools</h4>
+
+<p><a href="https://atom.io/packages/latextools">latextools</a> provides commands related to building and reference integration.
+It also defines a number of snippets in addition to those provided by language-latex.
+The <a href="https://github.com/msiniscalchi/atom-latextools/blob/master/MANUAL.md">manual</a> gives a complete usage description, but here are some of the most useful commands:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">C-alt-b</code>: compiles the pdf. By default this calls latexmk or texify, and so the bibiography will be compiled too if necessary.</li>
+  <li><code class="highlighter-rouge">C+l j</code> (the space means release the other keys, so <code class="highlighter-rouge">ctrl/cmd+ l</code> then <code class="highlighter-rouge">j</code>): jumps to position of cursor in pdf.</li>
+  <li><code class="highlighter-rouge">C-l c-n</code>: wrap in environment. It will insert <code class="highlighter-rouge">\begin{} ... \end{}</code> with a cursor between both sets of parentheses, so you can then type in the environment to both begin and end it. If you highlight a block of text before this, the opening and closing tags will be inserted <em>around</em> the text.</li>
+  <li><code class="highlighter-rouge">C-l C-c</code>: same as the above but for a command. If you highlight some text, <code class="highlighter-rouge">\{}</code> will be placed around it, and you just have to write the command.</li>
+  <li><code class="highlighter-rouge">C-l C-e</code>: wrap selected text in <code class="highlighter-rouge">\emph{}</code></li>
+  <li><code class="highlighter-rouge">C-l C-b</code>: wrap selected text in <code class="highlighter-rouge">\textbf{}</code></li>
+  <li><code class="highlighter-rouge">C-l C-u</code>: wrap selected text in <code class="highlighter-rouge">\textbf{}</code></li>
+  <li><code class="highlighter-rouge">C-l esc</code>: when you build the document, the console opens at the bottom. This will close it.</li>
+</ul>
+
+<p>These commands, and more, can also be run from the command pallette, which can be opened by pressing <code class="highlighter-rouge">C+Shift+p</code>.</p>
+
+<p>One of the nicest aspects of this package is the bibliography integration, which will allow you to search through the specified bibliography file, and fill in the citation key with the result.
+The window is very clear and customisable in the settings menu.</p>
+
+<p><img src="/images/atomsu/atomreferencesearch.gif" alt="Reference search" /></p>
+
+<h4 id="pdf-view">pdf-view</h4>
+
+<p>This one is down to personal choice.
+I prefer using an external pdf-viewer, such as <a href="https://okular.kde.org/">Okular</a> on Linux or <a href="https://skim-app.sourceforge.io/">Skim</a> on Mac.
+I work mostly often on a laptop and so this allows to use the whole screen for an editor and then switch windows to view the pdf in a full screen.
+However, if you like viewing the output and source side by side, and want them to be part of the same program (i.e. not tile them separate programs left and right), then <a href="https://atom.io/packages/pdf-view">pdf-view</a> will add a pdf viewer into the atom window.</p>
+
+<h4 id="character-table">Character Table</h4>
+
+<p>Writing non-Latin symbols and diacritics in Unicode is recommended.
+Whilst LaTeX allows for the writing of <em>š</em> as <code class="highlighter-rouge">\v{s}</code>, writing out in full in the source allows for a more readable source document, and allows you to reuse parts outside of LaTeX.
+This is particularly useful in linguistics so you can use your examples in other formates, e.g. in a word document, emails or in web pages/html slide shows.</p>
+
+<p><a href="https://github.com/klorenz/atom-character-table">Character Table</a> is a fantastic package that allows you to insert unicode symbols based on their code, or search for them by their name.
+So whilst you can always add the code using <code class="highlighter-rouge">ctrl-shift-u</code> on linux (or other way for windows/Mac), Character Table will allow you to search if you know the name, and not the code.
+Simply type <code class="highlighter-rouge">alt-l</code> to bring up the dialogue and search!</p>
+
+<p><img src="/images/atomsu/atomchartable.gif" alt="Hello" />.</p>
+
+<h4 id="zen">Zen</h4>
+
+<p><a href="https://atom.io/packages/zen">Zen</a> is a nice package that makes your text window, and only the text window full screen.
+That is, it removes everything but what you are writing, so as to minimise distractions. 
+This is nice for when you really need to just write, and not have a bunch of other things starting at you.</p>
+
+<h4 id="sync-settings">Sync-settings</h4>
+
+<p>If you use more than one computer <a href="https://atom.io/packages/sync-settings">sync-settings</a> is <em>really</em> useful to make sure that the settings are the same on both. 
+All you need is a <a href="https://github.com">github</a> account and you can use a gist to keep the settings there.
+All your packages, themes and keystrokes can then be synced between the two computers using the <code class="highlighter-rouge">backup</code> and <code class="highlighter-rouge">restore</code> commands in the command pallette.</p>
+
+<h4 id="git-plus">Git plus</h4>
+
+<p><a href="https://atom.io/packages/git-plus">Git plus</a> is good if you want to add git integration to your editor, rather than running it through a separate program or the terminal.</p>
+
+<h3 id="defining-snippets">Defining Snippets</h3>
+
+<p>latextools comes with some snippets predefined, for building the document and adding in some maths symbols and so on.
+However, you can also define your own.
+Go to <code class="highlighter-rouge">edit -&gt; snippets</code> and you open the file <code class="highlighter-rouge">snippets.cson</code> with all your snippets. 
+The snippets are written in coffeescript and take the form:</p>
+
+<div class="language-coffeescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">'.source.js'</span><span class="o">:</span>
+  <span class="s">'Snippet Name'</span><span class="o">:</span>
+    <span class="s">'prefix'</span><span class="o">:</span> <span class="s">'Snippet Trigger'</span>
+    <span class="s">'body'</span><span class="o">:</span> <span class="s">'Hello World!'</span>
+</code></pre></div></div>
+
+<p>This is the boilerplate of the snippet, which you can find if you type <code class="highlighter-rouge">snip</code> and then press <code class="highlighter-rouge">tab</code> in the snippets.cson file.
+There are four parts to a snippet. 
+In the above, the first line is the <strong>scope</strong> of the snippet, which is the language that it applies to.
+For LaTeX snippets, the scope should be <em>.text.tex</em>.
+The second line is a <strong>descriptive name</strong> for the snippet.
+This can be whatever you want.
+The <strong>prefix</strong> (third line) is the sequence of characters that you type, followed by <code class="highlighter-rouge">tab</code> to expand the snippet.
+The fourth line, the <strong>body</strong>, is what the snippet will expand to.
+Within the snippet you can use <code class="highlighter-rouge">$1</code> … <code class="highlighter-rouge">$2</code> as placeholders for cursors, that you can cycle through after expanding the snippet.
+<code class="highlighter-rouge">$1</code> is the position where the cursor will first appear.
+Hitting <code class="highlighter-rouge">tab</code> will move to position <code class="highlighter-rouge">$2</code> and pressing <code class="highlighter-rouge">tab</code> again will cycle to position <code class="highlighter-rouge">$3</code> and so on.
+For instance, to add in the surrounding code for a <code class="highlighter-rouge">gb4e</code> example, define the following snippet:</p>
+
+<div class="language-coffeescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">'.tex.tex'</span><span class="o">:</span>
+    <span class="s">'gb4e example boilerplate'</span><span class="o">:</span>
+    <span class="s">'prefix'</span><span class="o">:</span> <span class="s">'exe'</span>
+    <span class="s">'body'</span><span class="o">:</span> <span class="s">"""
+      </span><span class="se">\\\\</span><span class="s">begin{exe}
+        </span><span class="se">\\\\</span><span class="s">ex $1
+      </span><span class="se">\\\\</span><span class="s">end{exe}
+    """</span>
+</code></pre></div></div>
+
+<p>Then in the document, type <code class="highlighter-rouge">exe</code> followed by the <code class="highlighter-rouge">tab</code> key in the document, and the code will expand to the following, with the cursor placed one space after <code class="highlighter-rouge">\ex</code>:</p>
+
+<div class="language-latex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">\begin{exe}</span>
+    <span class="k">\ex</span> 
+<span class="nt">\end{exe}</span>
+</code></pre></div></div>
+
+<p><strong>Note:</strong> snippets can be written all on one line between <code class="highlighter-rouge">'...'</code>. If you want a line break in the output use <code class="highlighter-rouge">\n</code>, and <code class="highlighter-rouge">\t</code> will give a tab space. Snippets can also be written over multiple lines, in which case enclose the entire snippet in a sequence of three double quote marks, <code class="highlighter-rouge">"""</code> … <code class="highlighter-rouge">"""</code>
+Also, LaTeX uses a lot of <code class="highlighter-rouge">\</code>.
+<code class="highlighter-rouge">\</code> is used as a special symbol in coffeescript, and so writing <code class="highlighter-rouge">\</code> will not insert <code class="highlighter-rouge">\</code>. 
+You actually need to write a sequence of four backslashes to get a single one.
+There’s probably a good reason why this is the case, but I don’t know it.</p>
+
+<p>For example, suppose you have the following snippets defined.</p>
+
+<div class="language-coffeescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">'.text.tex.latex'</span><span class="o">:</span>
+  <span class="s">'ex'</span><span class="o">:</span>
+    <span class="s">'prefix'</span><span class="o">:</span> <span class="s">'exe'</span>
+    <span class="s">'body'</span><span class="o">:</span> <span class="s">'</span><span class="se">\\\\</span><span class="s">begin{exe}</span><span class="se">\n\t\\\\</span><span class="s">ex $1</span><span class="se">\n\\\\</span><span class="s">end{exe}'</span>
+
+  <span class="s">'tree'</span><span class="o">:</span>
+    <span class="s">'prefix'</span><span class="o">:</span> <span class="s">'tree'</span>
+    <span class="s">'body'</span><span class="o">:</span> <span class="s">"""
+          </span><span class="se">\\\\</span><span class="s">begin{tikzpicture}[baseline]
+            </span><span class="se">\\\\</span><span class="s">Tree [.$1 $2 $3 ]
+          </span><span class="se">\\\\</span><span class="s">end{tikzpicture}
+    """</span>
+</code></pre></div></div>
+
+<p>Then, they would allow you to expand them in the following way:</p>
+
+<p><img src="/images/atomsu/atomtreesnippet.gif" alt="Hello" />
+<em>Saves you typing a lot of repetitive things, and avoids many cases of missing brackets.</em></p>
+
+<h2 id="customising">Customising</h2>
+
+<p>One of the great things about Atom is that it is very easy to change as and when you need it to.
+The UI theme and editor theme can both be easily changed in the <code class="highlighter-rouge">settings -&gt; theme</code> menu.
+It comes preloaded with light and dark themes.
+But, if you want something else, there’s <em>many, many</em> more that can be installed like the packages above.
+Just search for them in <code class="highlighter-rouge">settings -&gt; install</code>, find one you like, then click <code class="highlighter-rouge">install</code> and it will do it for you.
+If you want examples, there are various <a href="https://www.developerdrive.com/best-atom-themes-developers/">lists</a> online to give you an idea of where to start.</p>
+
+<h2 id="bear-in-mind">Bear in mind</h2>
+
+<p>Overall Atom is a fantastic text editor for writing LaTeX in. 
+It’s particularly well suited for those that want an all-in-one editor where you can write the document and compile it from within the same programme. 
+That’s not necessarily what everyone is looking for, and you don’t need to use it like that.
+Most of the time I prefer just using Atom for the writing, and handle comiling and viewing externally, but the features such as user snippets and bibliography integration are really useful to write with, meaning that even if you don’t want to make use of the all-in-one experience that Atom can offer through the latextools package, then it still nice to use the program.</p>
+
+<p>Whilst Atom overall gives a really nice experience for writing LaTeX, it is not perfect.
+Firstly, it is a relatively heavy program to run, in terms of memory consumption.
+It is built on <a href="https://www.electronjs.org/">Electron</a>, a framework that allows desktop apps to be built using web technologies.
+Whilst this allows for easy customisation, and has allowed a large community to build a lot of packages, it runs on the Chromium browser, which uses a significant amount of memory on your computer.
+This is not such a problem if you have a new, decently powerful computer, but if you are running it on an old or low powered computer, it will slow your system down.
+Atom has also been known to have problems when dealing with large files but it hasn’t affected me all that much in my usage, just once or twice.</p>
+
+<p>Atom can also be overzealous in some of its default settings, favouring writing code over prose.
+It is aimed at developers after all.
+Some of the settings you may want to change:</p>
+
+<ul>
+  <li>Disable the <em>wrap-guide</em> to remove the vertical line running down the editor window two-thirds of the way across the screen.</li>
+  <li>The <em>autocomplete-plus</em> package can be useful for suggesting commands and snippets to autocomplete quickly, but it is distracting when writing prose, so consider either disabling the package altogether, or at least uncheck the <code class="highlighter-rouge">show suggestions on keystroke</code> option in the settings menu.</li>
+  <li>A lot of programming software languages are enabled by default, such as <em>langugage-csharp</em>, <em>language-php</em> etc. If you are not planning to use them, you should disable them.</li>
+</ul>
+
+<p>Finally, in recent years, Atom has been losing a lot of ground in user base to Microsoft’s <a href="https://code.visualstudio.com/">Visual Studio Code</a> (VS Code).
+I personally prefer Atom for writing LaTeX between the two, but in other cases it’s clear that VS Code provides a better experience.
+Microsoft owns Github, the developers of Atom, but have stated that they will keep developing both.
+However, the fact that VS Code is more widely used means that some packages available for Atom are no longer under development.
+This is not a problem for the ones I’ve mentioned here, but does come up from time to time in, for instance, themes.
+It’s not a reason not to use Atom, but something to be aware of.</p>
+<div class="footnotes">
+  <ol>
+    <li id="fn:apm">
+      <p>If you prefer to use the command line, Atom will also install a command line utility called <em>apm</em> which you can use to install packages, rather than through the GUI. <a href="#fnref:apm" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET
