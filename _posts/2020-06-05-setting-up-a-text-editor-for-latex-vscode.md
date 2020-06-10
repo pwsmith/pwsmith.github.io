@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Setting up a Visual Studio Code for LaTeX"
+title: "Setting up Visual Studio Code for LaTeX"
 date: 2020-06-05
 image: images/desk-web.jpg
 tags: [latex]
