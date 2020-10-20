@@ -1,9 +1,9 @@
-I"?F<h2 id="what-is-markdown">What is Markdown</h2>
+I"�G<h2 id="what-is-markdown">What is Markdown</h2>
 
 <p>Markdown is a markdown language that uses an extremely simple syntax, which then gets formatted correctly in the output. 
 The writer writes the files in plain text, and uses special tags for simple formatting.
-For instance enclosing text in asterisks will render as italics in the output: <code class="highlighter-rouge">*in the source code, this block is enclosed with italics*</code> will yield <em>in the source code, this block is enclosed with italics</em>.
-Enclosing text in <code class="highlighter-rouge">**double asterisks**</code> will output as <strong>boldface</strong>
+For instance enclosing text in asterisks will render as italics in the output: <code class="language-plaintext highlighter-rouge">*in the source code, this block is enclosed with italics*</code> will yield <em>in the source code, this block is enclosed with italics</em>.
+Enclosing text in <code class="language-plaintext highlighter-rouge">**double asterisks**</code> will output as <strong>boldface</strong>
 Similarly, writing the following:</p>
 
 <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">-</span> Some sentence here.
@@ -46,7 +46,7 @@ Each has benefits and drawbacks, which I’ll try to highlight.</p>
 
 <p>Once you have forked the repo from github, open the directory in whatever text editor you like (<a href="https://code.visualstudio.com/">Visual Studio Code</a> is a good one for this).
 The forked repository contains a number of demo files that you can alter.
-Within the <code class="highlighter-rouge">index.html</code> file, delete everything between the <code class="highlighter-rouge">&lt;div class="slides"&gt;...&lt;/div&gt;</code> and insert the following:</p>
+Within the <code class="language-plaintext highlighter-rouge">index.html</code> file, delete everything between the <code class="language-plaintext highlighter-rouge">&lt;div class="slides"&gt;...&lt;/div&gt;</code> and insert the following:</p>
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;section</span> <span class="na">data-markdown=</span><span class="s">"example.md"</span>
          <span class="na">data-separator=</span><span class="s">"^\n\n\n"</span>
@@ -56,13 +56,13 @@ Within the <code class="highlighter-rouge">index.html</code> file, delete everyt
 <span class="nt">&lt;/section&gt;</span>
 </code></pre></div></div>
 
-<p>Then, create a file within the same level as <code class="highlighter-rouge">demo.html</code> (or alter the path of <code class="highlighter-rouge">data-markdown</code> accordingly), and write your slides.
-The file name should match whatever value is given for <code class="highlighter-rouge">data-markdown</code> in the above code, and should have the extension <em>.md</em>.</p>
+<p>Then, create a file within the same level as <code class="language-plaintext highlighter-rouge">demo.html</code> (or alter the path of <code class="language-plaintext highlighter-rouge">data-markdown</code> accordingly), and write your slides.
+The file name should match whatever value is given for <code class="language-plaintext highlighter-rouge">data-markdown</code> in the above code, and should have the extension <em>.md</em>.</p>
 
 <p>Certain variables are defined in the above code.
-<code class="highlighter-rouge">data-separator-notes</code> refers to what sequence of characters will start a note (for using speaker notes).
-<code class="highlighter-rouge">data-separator</code> refers to what separates slides.
-<code class="highlighter-rouge">^\n\n\n</code> here means three blank lines delimit a slide.
+<code class="language-plaintext highlighter-rouge">data-separator-notes</code> refers to what sequence of characters will start a note (for using speaker notes).
+<code class="language-plaintext highlighter-rouge">data-separator</code> refers to what separates slides.
+<code class="language-plaintext highlighter-rouge">^\n\n\n</code> here means three blank lines delimit a slide.
 So, the following will produce two slides, because of the three blank lines between the first slide’s content and the heading of the second slide:</p>
 
 <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># First slide</span>
@@ -75,8 +75,8 @@ Content of first slide<span class="sb">
 
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">data-separator-vertical</code> refers to how a vertical slide is defined.
-Here, <code class="highlighter-rouge">^\n\n</code> means that two blank lines will embed a vertical slide.</p>
+<p><code class="language-plaintext highlighter-rouge">data-separator-vertical</code> refers to how a vertical slide is defined.
+Here, <code class="language-plaintext highlighter-rouge">^\n\n</code> means that two blank lines will embed a vertical slide.</p>
 
 <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># First slide</span>
 
@@ -139,18 +139,18 @@ Thus, below is equivalent to the above:</p>
 
 <p>Normally with reveal.js presentations, you can simply open the file in a web browser and it will render correctly. 
 However, note that using the method of an external markdown file, in order to actually view your slides, you need to run them on a local web server.
-Navigate to the <code class="highlighter-rouge">reveal.js</code> directory and run the following commands:</p>
+Navigate to the <code class="language-plaintext highlighter-rouge">reveal.js</code> directory and run the following commands:</p>
 
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>npm <span class="nb">install</span>
 <span class="nv">$ </span>npm start
 </code></pre></div></div>
 
-<p>Assuming that npm installs all the relevant packages correctly, then you will be able to view your slides at <code class="highlighter-rouge">http://localhost:8000</code>.<sup id="fnref:normalway"><a href="#fn:normalway" class="footnote">1</a></sup>.</p>
+<p>Assuming that npm installs all the relevant packages correctly, then you will be able to view your slides at <code class="language-plaintext highlighter-rouge">http://localhost:8000</code>.<sup id="fnref:normalway" role="doc-noteref"><a href="#fn:normalway" class="footnote">1</a></sup>.</p>
 
 <h3 id="positives">Positives</h3>
 
 <p>The major benefit of using this method is that you can write with markdown and the result is immediately available.
-In fact, once you run <code class="highlighter-rouge">npm start</code>, the slides will render as you save the document, meaning you can see them online as you type.
+In fact, once you run <code class="language-plaintext highlighter-rouge">npm start</code>, the slides will render as you save the document, meaning you can see them online as you type.
 This is a big positive over the pandoc method described below, which requires you to compile them each time.
 Secondly, your code is flexible: you can define whatever separators for the slides you want, so you can make it readable to yourself in whatever way works for you.</p>
 
@@ -161,7 +161,7 @@ If you stick to projecting from your local computer, it’s not a problem, howev
 There’s testing your slides in advance of your talk at a conference, and then there’s this.</p>
 
 <p>Secondly, this method does require some extra software.
-Once you run <code class="highlighter-rouge">npm install</code>, the installed <code class="highlighter-rouge">node_modules</code> directory gets very big, around 400mb.
+Once you run <code class="language-plaintext highlighter-rouge">npm install</code>, the installed <code class="language-plaintext highlighter-rouge">node_modules</code> directory gets very big, around 400mb.
 As a one-off, this is fine, but if you want multiple different reveal.js directories, your hard drive will fill up fast.</p>
 
 <h2 id="method-2-using-pandoc">Method 2: Using pandoc</h2>
@@ -230,7 +230,7 @@ For instance, if you wish to change the transition speed and use the beige theme
 <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pandoc <span class="nt">-t</span> revealjs INPUTFILE.md <span class="nt">-s</span> <span class="nt">-i</span> <span class="nt">-o</span> OUTPUTFILE.html <span class="nt">-V</span> <span class="nv">theme</span><span class="o">=</span>beige <span class="nt">-V</span> <span class="nv">transitionSpeed</span><span class="o">=</span>fast
 </code></pre></div></div>
 
-<p>Citations can be added using regular markdown citation syntax, and running with the <code class="highlighter-rouge">--filter  pandoc-citeproc</code> option.
+<p>Citations can be added using regular markdown citation syntax, and running with the <code class="language-plaintext highlighter-rouge">--filter  pandoc-citeproc</code> option.
 Note that you should then specify the path to the bibliography in the metadata of your markdown file.
 For instance:</p>
 
@@ -270,10 +270,10 @@ This is not such a problem, and is relatively quick, but it is still a disruptio
 
 <p>and you have the slides in beamer instead, nice!
 <strong>Note, for this, you need LaTeX installed on your system.</strong></p>
-<div class="footnotes">
+<div class="footnotes" role="doc-endnotes">
   <ol>
-    <li id="fn:normalway">
-      <p>You can also run these commands when you are writing your slides in html, and use the live preview to automatically update them when you save the file. <a href="#fnref:normalway" class="reversefootnote">&#8617;</a></p>
+    <li id="fn:normalway" role="doc-endnote">
+      <p>You can also run these commands when you are writing your slides in html, and use the live preview to automatically update them when you save the file. <a href="#fnref:normalway" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
 </div>

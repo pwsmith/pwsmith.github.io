@@ -1,4 +1,5 @@
-I"�}<p>This post is the first in a series that will outline how to use reveal.js to make slide shows for lingusitics talks. 
+I"
+<p>This post is the first in a series that will outline how to use reveal.js to make slide shows for lingusitics talks. 
 A lot of information is relevant for other academic disciplines as well.
 I do apologise to linguists who are not syntacticians or morphologists for not addressing area-specific requirements (OT-tableaux, for instance).</p>
 
@@ -10,7 +11,7 @@ Other options such as <a href="https://prezi.com/">Prezi</a> will also output sl
 
 <p><a href="https://github.com/hakimel/reveal.js/">Reveal.js</a> is a javascript library that creates a slide deck by writing in html.
 That means that the source code is plain text, and all it needs is a browser to run.
-Therefore, they are independent from a particular operating system (unlike powerpoint and keynote).<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup></p>
+Therefore, they are independent from a particular operating system (unlike powerpoint and keynote).<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup></p>
 
 <h2 id="so-its-like-beamer">So, it’s like beamer?</h2>
 
@@ -32,7 +33,7 @@ With reveal.js, it is possible to make maps like the excellent ones they have at
 <a href="https://pwsmith88.gitlab.io/reveal/quandt_brussels.html#/3/3">I did this recently</a> and the result is good. 
 It took a short while to figure out the code for the maps, but it’s easy to do once you get it going, and, whilst I know some, I don’t have a very high level of javascript knowledge.
 In addition to showing the audience the raw number of languages, people can interact with the map and find out which langauges etc.
-It’s not something you’ll do in a talk itself that much, but for people following along on their own computer either live, or after the fact, then it’s useful.<sup id="fnref:webhosting"><a href="#fn:webhosting" class="footnote">2</a></sup></p>
+It’s not something you’ll do in a talk itself that much, but for people following along on their own computer either live, or after the fact, then it’s useful.<sup id="fnref:webhosting" role="doc-noteref"><a href="#fn:webhosting" class="footnote">2</a></sup></p>
 
 <p>Another difference between the two is the flexibility with regards to appearance. 
 Whilst beamer presentations can be styled according to pre-built (such as <a href="https://hartwork.org/beamer-theme-matrix/">Warsaw, Malmoe or Frankfurt</a>, or the <em>very</em> nice <a href="https://github.com/matze/mtheme">metropolis theme</a>) or custom templates, reveal.js can be styled using javascript and css.
@@ -66,7 +67,7 @@ This is not to say that you <em>can’t</em> do similar styling with beamer, it 
 <p>In practice however, the markup language differences will have little to no effect on the writing process — aside from a couple of specific instances, discussed below — as a good text editor with snippet support will result in the same number of keystrokes being used to add in all of the surrounding markup, so the writer can focus on the content.</p>
 
 <p>The areas where there are noticeable differences for specifically linguists come in three areas: citations, examples and tree drawing.
-All of which are easily integrated into the LaTeX workflow through different packages , notably <code class="highlighter-rouge">biblatex/natbib</code> in the former case, <code class="highlighter-rouge">gb4e/linguex</code> for examples, and (some variant of) <code class="highlighter-rouge">qtree/forest</code> in the latter.
+All of which are easily integrated into the LaTeX workflow through different packages , notably <code class="language-plaintext highlighter-rouge">biblatex/natbib</code> in the former case, <code class="language-plaintext highlighter-rouge">gb4e/linguex</code> for examples, and (some variant of) <code class="language-plaintext highlighter-rouge">qtree/forest</code> in the latter.
 The big advantage of using these is that they directly integrate with latex and fit seamlessly into the text: these are compiled at the same time as the text, with the result that the native formatting of the paper and slides is used.
 Furthermore, in the case of citations they can be formatted according to the usual standards of the field.</p>
 
@@ -84,7 +85,7 @@ Ususally, at the end of a paper, one will find a list of citations like below:</
 <p>Usually, academics carry this over to slides as well, particularly if writing in beamer, given that the commands are the same.
 Unless one uses pandoc to generate reveal.js slides — I’ll shortly write a how-to, including advantages and disadvantages of this — there is no direct way to generate a citation list as given in the example above. 
 Html and css do not support bibliography management as far as I know, and whilst one can export a citation list using <a href="https://www.zotero.org/support/creating_bibliographies">Zotero</a> or <a href="https://knowledge.exlibrisgroup.com/RefWorks/Legacy_RefWorks/03Get_References/040Creating_a_Simple_Reference_List">Refworks</a> into html and incorporate that into your slides, this is still indirect, and is vulnerable to forgetting to include citations.
-One of the great things about LaTeX is that you need only include <code class="highlighter-rouge">\citet{reference}</code>, run biber/bibtex and it will appear there.</p>
+One of the great things about LaTeX is that you need only include <code class="language-plaintext highlighter-rouge">\citet{reference}</code>, run biber/bibtex and it will appear there.</p>
 
 <p>Since reveal.js does not offer this system then one has to change things a little.
 The obvious change, and the one that I use is to simply adapt to the system one is using and link your citations as hyperlinks in the slides.
@@ -112,7 +113,7 @@ As noted above, Zotero and Refworks offer such a possibility, and it’ also pos
 
 <p>Overall, a major benefit of using LaTeX is that there is a large amount of packages ready for use that have been developed over the years. 
 Given that reveal.js is a relatively new framework for making slides, and that it is not often used by adcademics, such packages are missing.
-This is starkly the case with tree drawing, something that is really easily handled by <code class="highlighter-rouge">qtree/forest</code> using LaTeX.</p>
+This is starkly the case with tree drawing, something that is really easily handled by <code class="language-plaintext highlighter-rouge">qtree/forest</code> using LaTeX.</p>
 
 <div class="language-tex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">\begin{tikzpicture}</span>[baseline]
 <span class="k">\Tree</span> [ [ A woman ] [ saw [ a dog ] ]
@@ -121,19 +122,19 @@ This is starkly the case with tree drawing, something that is really easily hand
 
 <p>Again, html and css don’t offer any native functionality to draw trees in this way.
 It <em>is</em> possible to do so using some javascript libraries: <a href="https://mermaid-js.github.io/mermaid/#/">Mermaid</a>, though intended as a library for making flow charts, can mimick syntactic trees (see <a href="https://pwsmith88.gitlab.io/reveal/quandt_brussels.html#/4/9">here</a> for a presentation I made using this method), however, it is far from ideal to do so.
-A better option is to simply draw the trees in graphic making software and export it as a png for inclusion in the talk.<sup id="fnref:svgnote"><a href="#fn:svgnote" class="footnote">3</a></sup> 
+A better option is to simply draw the trees in graphic making software and export it as a png for inclusion in the talk.<sup id="fnref:svgnote" role="doc-noteref"><a href="#fn:svgnote" class="footnote">3</a></sup> 
 There are some good options in this case, and I prefer to use <a href="https://inkscape.io">Inkscape</a>, which makes the job very easy to do once you know the program.</p>
 
 <h2 id="laying-out-examples">Laying out examples</h2>
 
 <p>Linguistics has a specific set of typographical requirements, chief among them the need to put examples in numbered lists.
-Using LaTeX makes this easy to do, by using either the <code class="highlighter-rouge">gb4e</code> or the <code class="highlighter-rouge">linguex</code> package.
+Using LaTeX makes this easy to do, by using either the <code class="language-plaintext highlighter-rouge">gb4e</code> or the <code class="language-plaintext highlighter-rouge">linguex</code> package.
 What is nice about these packages is that they will not only do the numbering automatically, but they also line up the examples together so that they all start at the same level of indentation.
 It is possible to recreate this behaviour for reveal.js presentations by making the layout in css.
 I have made a css template, <a href="https://github.com/pwsmith/htmlex">htmlex</a>, that should serve as the basis.</p>
 
 <p>In brief, the idea is to use css counters to create the numbering, flexboxes to line the elements up in right place, and to use <a href="https://linguistics.stackexchange.com/questions/3/how-do-i-format-an-interlinear-gloss-for-html/159#159">this answer</a> for getting the words and the glosses lined up right.
-The result, as you can see below is a pretty good recreation of what <code class="highlighter-rouge">gb4e/linguex</code> would make for you.</p>
+The result, as you can see below is a pretty good recreation of what <code class="language-plaintext highlighter-rouge">gb4e/linguex</code> would make for you.</p>
 
 <!-- <div class="gloss-example-container">
     <div class='gloss-individual-example'>
@@ -371,16 +372,16 @@ The <a href="https://github.com/hakimel/reveal.js/">user guide</a> is very detai
   <li>Examples are laid out using css flexbox.</li>
 </ul>
 
-<div class="footnotes">
+<div class="footnotes" role="doc-endnotes">
   <ol>
-    <li id="fn:1">
-      <p>Yes, I know that you can run powerpoint on Apple, but it never works <em>quite</em> as well as you’d hope. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    <li id="fn:1" role="doc-endnote">
+      <p>Yes, I know that you can run powerpoint on Apple, but it never works <em>quite</em> as well as you’d hope. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:webhosting">
-      <p>You can host the slides on github or gitlab and share the address with the audience. <a href="#fnref:webhosting" class="reversefootnote">&#8617;</a></p>
+    <li id="fn:webhosting" role="doc-endnote">
+      <p>You can host the slides on github or gitlab and share the address with the audience. <a href="#fnref:webhosting" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:svgnote">
-      <p>Exporting to png is not the only option, one can also include the images as svg files, in which case it is possible, though not trivial, to animate the trees as one can do so with any svg element on a webpage. This is useful if you have used beamer overlays to make trees grow or to dynamically add items to them. But, this is a topic for a different day. <a href="#fnref:svgnote" class="reversefootnote">&#8617;</a></p>
+    <li id="fn:svgnote" role="doc-endnote">
+      <p>Exporting to png is not the only option, one can also include the images as svg files, in which case it is possible, though not trivial, to animate the trees as one can do so with any svg element on a webpage. This is useful if you have used beamer overlays to make trees grow or to dynamically add items to them. But, this is a topic for a different day. <a href="#fnref:svgnote" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
 </div>

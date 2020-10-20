@@ -4,7 +4,10 @@
 
 .highlight {
   background: #f7f7f7;
+  // background: #000000;
   margin-bottom: 1em;
+  font-family: 'Ubuntu Mono', monospace;
+
   .highlighter-rouge & {
     background: #eef;
   }
@@ -68,4 +71,9 @@
   .vg    { color: #008080 } // Name.Variable.Global
   .vi    { color: #008080 } // Name.Variable.Instance
   .il    { color: #099 } // Literal.Number.Integer.Long
+}
+
+.language-plaintext {
+  background-color: #eef;
+  font-family: 'Ubuntu Mono', monospace;
 }

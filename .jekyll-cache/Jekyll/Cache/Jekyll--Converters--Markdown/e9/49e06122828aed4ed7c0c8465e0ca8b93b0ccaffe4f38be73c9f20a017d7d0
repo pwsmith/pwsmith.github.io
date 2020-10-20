@@ -1,0 +1,305 @@
+I"�x<p><span>Photo by <a href="https://unsplash.com/@naomitamar?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">naomi tamar</a> on <a href="https://unsplash.com/s/photos/fish-tank?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span></p>
+
+<h1 id="scope-of-the-issue">Scope of the issue</h1>
+
+<p>Commonly, in non-fiction there is an index at the end to allow readers to look at a collated list of topics that are contained within with page numbers where they are discussed, so the reader can go directly there without having to scan through the whole book each time.
+Books written in LaTeX can make use of the <code class="language-plaintext highlighter-rouge">imakeidx</code> package to generate the index.
+The package is <a href="https://www.ctan.org/pkg/imakeidx">well documented</a>, and I won’t discuss it in any real detail here, as there are tutorials online for how to use it.<sup id="fnref:imakeidx_tutorials" role="doc-noteref"><a href="#fn:imakeidx_tutorials" class="footnote">1</a></sup>
+What’s important is that each term that you want to index is followed by the command <code class="language-plaintext highlighter-rouge">\index{TERM}</code>.
+So, say that you want to index <code class="language-plaintext highlighter-rouge">second</code> in the text below, you’d add in <code class="language-plaintext highlighter-rouge">\index{second}</code> like so:</p>
+
+<div class="language-tex highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A second<span class="k">\index</span><span class="p">{</span>second<span class="p">}</span> is one of the fundmental units of time.
+</code></pre></div></div>
+
+<p>In an ideal world, you would create the index as you write, so that each time you put in a term, you already put the index marker in the source text.
+However, writing a book doesn’t really work that way and, <a href="https://www.degruyter.com/view/title/542047">take it from me</a>, what you end up writing will rarely match exactly what you set out to write.
+It’s better then to do the index at the end of the project, when you can see the book in context and know the contents.</p>
+
+<p>The problem is, then you have to go through your source files and put the <code class="language-plaintext highlighter-rouge">\index{TERM}</code> command after everything you wish to index.
+That’s a daunting prospect for a long book.
+So, what is the best way to do this?</p>
+
+<h1 id="the-obvious">The obvious</h1>
+
+<p>Suppose you have gone through your work, noted which are the important terms you want in the index, conceptualised how they all group together (i.e. what stands alone, what categories can be nested under others etc.) and you’re ready to do it.
+The obvious thing to do is to go to the beginning of the pdf, start reading, and wherever you see something you want to index, run synctex, find the item in the source, and input the relevant index marker.
+Easy, right?
+This is certainly one way to do it, and not an inherently bad one, but there are some downsides.
+It is repetitive, in many many cases redundant, as you will enter the same text for the same item in various different places, and most likely, you are going to miss some.
+Why?
+Well, if you have 50 items you want to index, you need to keep the entire group of 50 in your mind whilst you read through.
+You <em>may not</em> miss some, but chances are you will.
+So, whilst this is an option, it seems there is a better way.
+Let’s call this Plan B for now.</p>
+
+<h1 id="replace-all-with-a-gui">Replace All with a GUI?</h1>
+
+<p>As I noted before, indexing in LaTeX is pretty easy.
+Suppose that you want to index <em>second</em>, then all you need to do is add <code class="language-plaintext highlighter-rouge">\index{second}</code> after every instance of <em>second</em>. Simple.
+It effectively boils down to <code class="language-plaintext highlighter-rouge">second</code> -&gt; <code class="language-plaintext highlighter-rouge">second\index{second}</code>.
+There’s two ways of looking at this. 
+Firstly, one can <em>append</em> <code class="language-plaintext highlighter-rouge">\index{second}</code> to every instance of <code class="language-plaintext highlighter-rouge">second</code>.
+Or you can <em>replace</em> the string <code class="language-plaintext highlighter-rouge">second</code> with <code class="language-plaintext highlighter-rouge">second\index{second}</code>.
+The effect is the same, in the sense that the result is one of appending the index command.
+However, the subtle difference is that you replace the original string, but the replacement string contains the original string.</p>
+
+<p>The next obvious solution is that most text editors have a function that allows you to find and replace text.
+Usually by hitting something like <code class="language-plaintext highlighter-rouge">control/command+f</code> you can get the editor to scan through the document and find the next instance of the string you’re searching for.
+Then, depending on your editor, there is often an option to <em>replace</em> that with a different one.
+We can then make a simpler version of the procedure above, and for a specific term, programmatically go through the document hitting <code class="language-plaintext highlighter-rouge">find</code> and then <code class="language-plaintext highlighter-rouge">replace</code>.
+Again however, there is a problem.
+This is easier than earlier, but still redundant in that you are repeating the same step over and over.</p>
+
+<p>So, how about the <code class="language-plaintext highlighter-rouge">replace all</code> option, that will at a click replace <em>every</em> instance of the chosen string with the alternative?
+That’s what we’re striving for, right?
+The procedure now is simple, hit <code class="language-plaintext highlighter-rouge">control+f</code>, enter <em>second</em> in the then click <code class="language-plaintext highlighter-rouge">replace all</code>.
+Easy.
+Repeat that 50 times for your terms, and you have yourself an index.
+Right?
+Well, yes, but probably not the one you want.</p>
+
+<p>Two problems.
+Firstly, language is, frankly, annoying for this task.<sup id="fnref:stupid_language" role="doc-noteref"><a href="#fn:stupid_language" class="footnote">2</a></sup>
+Homophony, where the same string means different things, means that not every instance of the word <em>second</em> is going to be right.
+If you want to index the unit of time, then with <code class="language-plaintext highlighter-rouge">replace all</code> you may also end up indexing <em>second</em> in the sense of “second place”, which is not ideal.
+You may even use the verb <em>seconded</em>, which is going to get conflated with the unit of time.
+Again, not ideal.
+The second (get it?) issue is that books are long, and best practice with LaTeX is to split long documents up into smaller parts and call them from a main document with the <code class="language-plaintext highlighter-rouge">\include{}</code> or <code class="language-plaintext highlighter-rouge">\input{}</code> command.
+You don’t have to write this way, but if you compile a 300 page document each time, it’s going to take a while and this can be annoying when debugging.
+<code class="language-plaintext highlighter-rouge">Replace all</code> often only works on a single document, and not for all documents in an entire directory.
+So, if you have 6 chapters of a book, all split into different files, then you have to run the same command six times.
+We’re starting to zero in on the solution, but we need a better way still, that allows us to replace all in one go, but important (i) quickly check what we’re replacing; and (ii) do all of our source files at once.</p>
+
+<h1 id="enter-bash-find-and-replace-with-sed">Enter bash: find and replace with <code class="language-plaintext highlighter-rouge">sed</code></h1>
+
+<p>Doing the same task on a batch of files in one go is ideally suited to using the shell of your computer.
+There are a number of different shells available, with <em>bash</em> and <em>zsh</em> being the most common on unix based systems (Linux, Mac and BSD, for instance) and <em>powershell</em> on Windows. 
+I’ll use bash in what follows.
+Find-and-replace can be done on the command line using <em>sed</em>, or ‘stream editor’.
+It is a very powerful tool, that can also be used to append, as we’ll see later.
+Changes can be written either to the standard output, in which case you’ll see them on your terminal screen, or written into the source document, or written to a new document.
+We’ll use the former two.</p>
+
+<p>Let’s see a simple example.
+In our directory with the source files, suppse there is a file <code class="language-plaintext highlighter-rouge">chapter_1.tex</code> that contains the following text.</p>
+
+<div class="language-tex highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A <span class="k">\textbf</span><span class="p">{</span>second<span class="p">}</span> is one of the fundamental units of time.
+There are 60 seconds for each <span class="k">\textbf</span><span class="p">{</span>minute<span class="p">}</span>.
+Beneath the level of the second is the <span class="k">\textbf</span><span class="p">{</span>millisecond<span class="p">}</span>, the <span class="k">\textbf</span><span class="p">{</span>nanosecond<span class="p">}</span> and the <span class="k">\textbf</span><span class="p">{</span>microsecond<span class="p">}</span>.            
+Second, the term, was borrowed into English from Old French <span class="k">\cite</span><span class="p">{</span>wiktionary<span class="p">}</span>.
+Second to none, the second is the easiest unit to count with.
+</code></pre></div></div>
+
+<p>If we want to use <code class="language-plaintext highlighter-rouge">sed</code> to replace all instances of <em>second</em>, with, say, <em>hour</em>, then we run the following:
+The <code class="language-plaintext highlighter-rouge">s</code> prefix indicates the substitution operation, and <code class="language-plaintext highlighter-rouge">g</code> suffix indicates that the change should happen globally throughout the file, rather than just the first instance.
+Between the slashes, the first string is the original, and the second is the replacement.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sed</span> <span class="nt">-e</span> <span class="s1">'s/second/hour/g'</span> chapter_1.tex
+</code></pre></div></div>
+
+<p>And this prints the following to the terminal screen:</p>
+
+<p><img src="/images/bash_index/second-to-hour.png" alt="screenshot showing second replaced by hour in standard output" />
+<em>Find and replace with <code class="language-plaintext highlighter-rouge">sed</code></em></p>
+
+<p>Let’s say we run that to check and we’re happy.
+Now we want to make the change in the file, then we replace with <code class="language-plaintext highlighter-rouge">-e</code> flag with <code class="language-plaintext highlighter-rouge">-i</code> (in place).</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sed</span> <span class="nt">-i</span> <span class="s1">'s/second/hour/g'</span> chapter_1.tex
+</code></pre></div></div>
+
+<p>Compare the result of running <code class="language-plaintext highlighter-rouge">cat</code> on the <code class="language-plaintext highlighter-rouge">chapter_1.tex</code> before and after the command is run.</p>
+
+<p><img src="/images/bash_index/second-to-hour-i.png" alt="screenshot showing second replaced by hour in the file" />
+<em>Note the differing outputs of running <code class="language-plaintext highlighter-rouge">cat chapter_1.tex</code> before and after <code class="language-plaintext highlighter-rouge">sed</code></em></p>
+
+<p>But suppose you also want to change the last instance also, on the last line. 
+This begins with a capital, so it wasn’t picked up by <code class="language-plaintext highlighter-rouge">sed</code> the first time.
+Fortunately, <code class="language-plaintext highlighter-rouge">sed</code> can be combined with regular expressions, so you can make the query <code class="language-plaintext highlighter-rouge">[sS]econd</code>, and the search will pick up both <code class="language-plaintext highlighter-rouge">second</code> and <code class="language-plaintext highlighter-rouge">Second</code>.</p>
+
+<p><img src="/images/bash_index/second-regex.png" alt="screenshot showing second and Second replaced by hour in the file" />
+<em>Using a basic regular expression with <code class="language-plaintext highlighter-rouge">sed</code></em></p>
+
+<h1 id="making-a-bash-function-for-indexing">Making a bash function for indexing</h1>
+
+<p>Now we have the basics in place of what we need to define a function that we will use for indexing.
+Firstly, make a file to store the function.
+The name doesn’t matter, so we’ll just call it <code class="language-plaintext highlighter-rouge">index.sh</code>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function </span>index<span class="o">()</span> <span class="o">{</span>
+    <span class="nb">sed</span> <span class="nt">-e</span> <span class="s1">'s/'</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="s1">'/'</span><span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span><span class="s1">'/g'</span> <span class="nv">$3</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Then type <code class="language-plaintext highlighter-rouge">source index.sh</code> and the function will be added to your environment.
+This is used as follows.
+Typing <code class="language-plaintext highlighter-rouge">index</code> at your terminal calls the function, then the string you wish to replace (the <em>query</em>), the string you wish to be the replacement, and then the file you want to do it for.
+Bash will match the first word after <code class="language-plaintext highlighter-rouge">index</code> to <code class="language-plaintext highlighter-rouge">$1</code>, the second to <code class="language-plaintext highlighter-rouge">$2</code> and the third to <code class="language-plaintext highlighter-rouge">$3</code>.
+Going back to what we’ve been doing so far, suppose again that we wish to replace <code class="language-plaintext highlighter-rouge">second</code> with <code class="language-plaintext highlighter-rouge">hour</code> in <code class="language-plaintext highlighter-rouge">chapter_1.tex</code>, at the command line run the following:</p>
+
+<p><img src="/images/bash_index/first-attemp-index-function.png" alt="first attempt at the index function" /></p>
+
+<p>Nice!</p>
+
+<p>But, we need some refinements.
+All we’ve done so far is replicate the GUI replace all function.
+But, we wanted to make it do two more things. 
+We wanted it to allow us to check, to make sure it’s all good, so we don’t blindly replace everything.
+We’ll soon add this functionality to allow us to note wrong instances, and go back and correct them later.
+We also wanted to be able to do it for all files in the directory.</p>
+
+<h2 id="looping-over-files">Looping over files</h2>
+
+<p>Let’s deal with the latter first.
+This, we achieve with a simple bash for-loop:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function </span>index<span class="o">()</span> <span class="o">{</span>    
+    <span class="k">for </span>FILE <span class="k">in</span> <span class="k">*</span>.tex      
+    <span class="k">do                               
+    </span><span class="nb">sed</span> <span class="nt">-e</span> <span class="s1">'s/'</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="s1">'/'</span><span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span><span class="s1">'/g'</span> <span class="nv">$FILE</span>     
+    <span class="k">done</span>                                          
+<span class="o">}</span>    
+</code></pre></div></div>
+
+<p>We now no longer need to specify a file to run <code class="language-plaintext highlighter-rouge">sed</code> on, as the bash loop will run it on all files that have the <code class="language-plaintext highlighter-rouge">.tex</code> suffix.
+Let’s suppose that in addition to <code class="language-plaintext highlighter-rouge">chapter_1.tex</code> we have a second chapter, <code class="language-plaintext highlighter-rouge">chapter_2.tex</code>, with the following contents:</p>
+
+<div class="language-tex highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A <span class="k">\textbf</span><span class="p">{</span>second<span class="p">}</span> after he left, the phone rang.
+He would have only had time to talk for a <span class="k">\textbf</span><span class="p">{</span>minute<span class="p">}</span> anyway.
+But obviously he could talk for more than a <span class="k">\textbf</span><span class="p">{</span>millisecond<span class="p">}</span>, a <span class="k">\textbf</span><span class="p">{</span>nanosecond<span class="p">}</span> and a <span class="k">\textbf</span><span class="p">{</span>microsecond<span class="p">}</span>.            
+Second to none, the second he left was the biggest regret of his life.  
+</code></pre></div></div>
+
+<p>Now, if we run our modified function, we get the following to standard output:</p>
+
+<p><img src="/images/bash_index/two-chapters-initial.png" alt="running our preliminary index function over two chapters. The word 'second' in both files has been replaced by 'hour' in the standard output" />
+<em>Now we’re looping</em></p>
+
+<h2 id="making-an-actual-index-function">Making an actual index function</h2>
+
+<p>Before moving on though, let’s revise the function to make a proper index. 
+I’ve been using replacement to demonstrate the use of <code class="language-plaintext highlighter-rouge">sed</code>, but recall that we don’t want to replace, but rather append <code class="language-plaintext highlighter-rouge">\index{TERM}</code>.
+It’s tempting to simply add in <code class="language-plaintext highlighter-rouge">$1</code> in the replacement slot:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function </span>index<span class="o">()</span> <span class="o">{</span>    
+    <span class="k">for </span>FILE <span class="k">in</span> <span class="k">*</span>.tex    
+    <span class="k">do    
+    </span><span class="nb">sed</span> <span class="nt">-e</span> <span class="s1">'s/'</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="s1">'/'</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="s1">'\\index\{'</span><span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span><span class="s1">'\}/g'</span> <span class="nv">$FILE</span>    
+    <span class="k">done</span>                                  
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>But, the query will not always match the replacement, especially if the query involves a regular expression:</p>
+
+<p><img src="/images/bash_index/pre-group.png" alt="using the query as part of the replacement fails with regular expressions" />
+<em>This is clearly not what we want.</em></p>
+
+<p>The solution is to use a group in the replacement string.
+The escaped parentheses in the query creates a group, which is then referred to with <code class="language-plaintext highlighter-rouge">\1</code> in the replacement string.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function </span>index<span class="o">()</span> <span class="o">{</span>    
+    <span class="k">for </span>FILE <span class="k">in</span> <span class="k">*</span>.tex    
+    <span class="k">do    
+    </span><span class="nb">sed</span> <span class="nt">-e</span> <span class="s1">'s/\('</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="s1">'\)/\1\\index\{'</span><span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span><span class="s1">'\}/g'</span> <span class="nv">$FILE</span>        
+    <span class="k">done</span>                                  
+<span class="o">}</span>     
+</code></pre></div></div>
+
+<p><img src="/images/bash_index/function-with-group.png" alt="using the query as part of the replacement fails with regular expressions gets the right result with group variable" /></p>
+
+<p>This is better. 
+However, it’s still not quite right as we’re now indexing a couple of things we shouldn’t.
+Firstly, <em>nanosecond</em>, <em>millisecond</em> and <em>microsecond</em> shouldn’t get indexed.
+Though they contain the string <em>second</em>, they refer to different things.
+Secondly, <em>Second to none</em> has an indexed item in it, but it doesn’t refer to a unit of time here, but second as in ‘second place’.
+We can fix the former by refining our query to add in a word boundary at the beginning of the string with <code class="language-plaintext highlighter-rouge">\b</code>.
+Because there is no word boundary before <code class="language-plaintext highlighter-rouge">second</code> in, eg., <code class="language-plaintext highlighter-rouge">microsecond</code>, then it doesn’t match the query:</p>
+
+<p><img src="/images/bash_index/refined-regex.png" alt="adding in a word boundary in the query means we don't index microsecond, for instance" />
+<em>We’re no longer indexing, eg., ‘microsecond’ with ‘second’</em></p>
+
+<p>For the latter case, there is not much we can do. 
+The query matches, as it should do.
+The problem is, as noted earlier, there are two homophonous uses of ‘second’.
+These tend to be fairly rare, so it’s best to make a note of where they happen, and fix them by hand later.</p>
+
+<h2 id="adding-in-checking">Adding in checking</h2>
+
+<p>Now we can loop over files, let’s move to the other functionality we want to add, the ability to check before replacing.
+Up to now we’ve been printing the output of <code class="language-plaintext highlighter-rouge">sed</code> to standard output with the <code class="language-plaintext highlighter-rouge">-e</code> flag.
+This provides a convenient way to check.
+But, we’ve also just been looking at the entire output.
+In our toy example, with two files of around five lines each, it’s not a problem to look through and manually check all instanes of the query but this gets unwieldy really fast.
+So, we’ll first run the query through <code class="language-plaintext highlighter-rouge">grep</code>, add in colour highlighting of the query with <code class="language-plaintext highlighter-rouge">--color=always</code>, and also use the <code class="language-plaintext highlighter-rouge">-H</code> and <code class="language-plaintext highlighter-rouge">-n</code> flags to show file name and line numbers respectively.
+This will allow us to quickly scan all and only the instances of the query, and make a note if there are any we will need to fix manually later (such as with the two instances of <em>Second</em>, which don’t fit the ‘unit of time’ meaning).</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function </span>index<span class="o">()</span> <span class="o">{</span>    
+    <span class="k">for </span>FILE <span class="k">in</span> <span class="k">*</span>.tex    
+    <span class="k">do    
+    </span><span class="nb">grep</span> <span class="nt">-nH</span> <span class="nt">--color</span><span class="o">=</span>always <span class="nv">$1</span> <span class="nv">$FILE</span> | <span class="nb">sed</span> <span class="nt">-e</span> <span class="s1">'s/\('</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="s1">'\)/\1\\index\{'</span><span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span><span class="s1">'\}/g'</span>        
+<span class="k">done</span>                                           
+<span class="o">}</span>     
+</code></pre></div></div>
+
+<p><img src="/images/bash_index/with-grep.png" alt="output showing first filtering the query through grep, with file and line numbers" />
+<em>Note the use of the single quotes in the query when we run the command. That’s important for <code class="language-plaintext highlighter-rouge">grep</code> to correctly identify <code class="language-plaintext highlighter-rouge">\b</code></em></p>
+
+<p>Up until now, we’ve been running <code class="language-plaintext highlighter-rouge">sed</code> with the <code class="language-plaintext highlighter-rouge">-e</code> flag and previewing the results in standard output on the terminal, which serves as a useful check, but we also want to make the results in the file.
+So, as a final step, we’ll add in a second run of <code class="language-plaintext highlighter-rouge">sed</code>, this time with the <code class="language-plaintext highlighter-rouge">-i</code> flad if the preview looks good.
+What we need for this is to add a if-loop into our bash function after the run of <code class="language-plaintext highlighter-rouge">sed</code>.
+If we’re happy with the result then we continue to run <code class="language-plaintext highlighter-rouge">sed -i</code>, if not, the function should abort to give us a chance to refine our query.
+We’ll also map the command line input to variables to allow them to be used throughout the function, including within the if-loop:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function </span>index<span class="o">()</span> <span class="o">{</span>
+    <span class="nv">ARG1</span><span class="o">=</span><span class="nv">$1</span>
+    <span class="nv">ARG2</span><span class="o">=</span><span class="nv">$2</span>
+    <span class="k">for </span>FILE <span class="k">in</span> <span class="k">*</span>.tex
+    <span class="k">do
+    </span><span class="nb">grep</span> <span class="nt">-nH</span> <span class="nt">--color</span><span class="o">=</span>always <span class="nv">$ARG1</span> <span class="nv">$FILE</span> | <span class="nb">sed</span> <span class="nt">-e</span> <span class="s1">'s/\('</span><span class="s2">"</span><span class="nv">$ARG1</span><span class="s2">"</span><span class="s1">'\)/\1\\index\{'</span><span class="s2">"</span><span class="nv">$ARG2</span><span class="s2">"</span><span class="s1">'\}/g'</span>
+    <span class="k">done
+</span><span class="nb">read</span> <span class="nt">-p</span> <span class="s1">'Is this correct (y/n): '</span> VALIDATION
+    <span class="k">if</span> <span class="o">[</span> <span class="k">${</span><span class="nv">VALIDATION</span>::1<span class="k">}</span> <span class="o">==</span> Y <span class="o">]</span> <span class="o">||</span> <span class="o">[</span> <span class="k">${</span><span class="nv">VALIDATION</span>::1<span class="k">}</span> <span class="o">==</span> y <span class="o">]</span>
+    <span class="k">then
+        </span><span class="nb">echo</span> <span class="s2">"Applying changes to file."</span>
+        <span class="k">for </span>SOURCE <span class="k">in</span> <span class="k">*</span>.tex
+            <span class="k">do
+            </span><span class="nb">sed</span> <span class="nt">-i</span> <span class="s1">'s/\('</span><span class="s2">"</span><span class="nv">$ARG1</span><span class="s2">"</span><span class="s1">'\)/\1\\index\{'</span><span class="s2">"</span><span class="nv">$ARG2</span><span class="s2">"</span><span class="s1">'\}/g'</span> <span class="nv">$SOURCE</span>
+            <span class="k">done
+    else
+        </span><span class="nb">echo</span> <span class="s2">"Function aborted, go and refine the query."</span>
+    <span class="k">fi</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>And that’s it!
+Now when we want to index a term, like <code class="language-plaintext highlighter-rouge">second</code>.
+All we need to do is run the following:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>index <span class="s1">'\b[sS]econd'</span> second
+</code></pre></div></div>
+
+<p>First <code class="language-plaintext highlighter-rouge">grep</code> will find the relevant instances, feed that into <code class="language-plaintext highlighter-rouge">sed</code>, which will then print to the terminal the suggested changes.
+A prompt will appear asking if that is correct, and if you then press <code class="language-plaintext highlighter-rouge">y</code> or <code class="language-plaintext highlighter-rouge">Y</code> (or type yes or Yes), then the command will run again and <code class="language-plaintext highlighter-rouge">sed</code> will this time make the changes in the file.
+If not, it will abort and prompt you to refine your query.
+The result:</p>
+
+<p><img src="/images/bash_index/full-function.png" alt="Running the final function and making the changes in file" />
+<em>Running the full function. Note again the second <code class="language-plaintext highlighter-rouge">cat</code> output, where the changes have been made in-file.</em></p>
+
+<p>It’s important to note that this will <em>not</em> do everything for you. 
+As I said before, language doesn’t allow for a perfect 1:1 mapping between terms and meanings. 
+In our example files, some instances of <code class="language-plaintext highlighter-rouge">Second</code> have been picked up which should not be indexed, as in <em>Second to none</em>.
+However, if you refine the query enough, and carefully check before you implement the changes, you can write down the files and locations of the ‘wrongly indexed’ instances and go and manually change them. 
+This sould be easy, given that the <code class="language-plaintext highlighter-rouge">grep</code> query, with the <code class="language-plaintext highlighter-rouge">-nH</code> flag will tell you which file, and line number the example came from.</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:imakeidx_tutorials" role="doc-endnote">
+      <p><a href="https://www.overleaf.com/learn/latex/Indices">Here</a> and <a href="https://en.wikibooks.org/wiki/LaTeX/Indexing#imakeidx">here</a>, for instance. <a href="#fnref:imakeidx_tutorials" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:stupid_language" role="doc-endnote">
+      <p>Take it from me, I have a PhD in linguistics and everything. <a href="#fnref:stupid_language" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

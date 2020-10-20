@@ -1,4 +1,4 @@
-I"<h1 id="htmlex">HTMLEX</h1>
+I":<h1 id="htmlex">HTMLEX</h1>
 
 <p>In the last semester I have been putting my teaching slides together using <a href="https://github.com/hakimel/reveal.js/">reveal.js</a>, rather than beamer as I usually would. 
 Reveal.js is a javascript library for creating slide decks, where the slides are written in html format and styled with css and javascript.
@@ -8,12 +8,12 @@ I will shortly post some articles about using reveal.js for making linguistics s
 <p>I have been wanting to use reveal.js rather than beamer for a while, since the sldies look really nice on <a href="https://github.com/hakimel/reveal.js/wiki/Example-Presentations">their example</a>, and being effectively webpages, are interactive, rather than static like pdf files.
 Also, whilst beamer is a great piece of software, I wanted to try something new as the results turn out very similar in beamer, and customisation is difficult, <a href="https://github.com/pwsmith/beamerthemesof">but not impossible</a>.
 One thing that has held stopped me up until this semester is the formatting required by linguists: we need to label examples with numbers and frequently need to line up morpheme glosses.
-Both of these things are done automatically in LaTeX using <code class="highlighter-rouge">gb4e</code> but I couldn’t find an alternative for html based on a quick few looks.</p>
+Both of these things are done automatically in LaTeX using <code class="language-plaintext highlighter-rouge">gb4e</code> but I couldn’t find an alternative for html based on a quick few looks.</p>
 
 <p>When I finally did start using reveal.js, I came across <a href="https://linguistics.stackexchange.com/questions/3/how-do-i-format-an-interlinear-gloss-for-html/159#159">this answer</a> on stackexchange about the very issue of formatting glossing in html.
-So, I modified the answer gave, and have built <code class="highlighter-rouge">htmlex</code>, which is a css file that defines elements that can be used for formatting linguistic examples when writing in html.
+So, I modified the answer gave, and have built <code class="language-plaintext highlighter-rouge">htmlex</code>, which is a css file that defines elements that can be used for formatting linguistic examples when writing in html.
 It’s available <a href="https://github.com/pwsmith/htmlex">on my github page</a> and available on an open source license.
-It’s intended to be a html equivalent to <code class="highlighter-rouge">gb4e/linguex</code>, for those of a LaTeX background.
+It’s intended to be a html equivalent to <code class="language-plaintext highlighter-rouge">gb4e/linguex</code>, for those of a LaTeX background.
 It allows you to create output like the following that can be used in html pages like this, as well as html slides built using, for example, reveal.js or <a href="https://github.com/impress/impress.js/">impress.js</a>.</p>
 
 <div class="example-container">

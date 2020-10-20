@@ -1,4 +1,4 @@
-I"�><p>With revealjs outlined in a <a href="/2020/01/11/revealjs-for-linguistics-part-2-basic-presentations/">previous post</a>, with its pros and cons outlined there, now I will outline how to build a basic slideshow.
+I"?<p>With revealjs outlined in a <a href="/2020/01/11/revealjs-for-linguistics-part-2-basic-presentations/">previous post</a>, with its pros and cons outlined there, now I will outline how to build a basic slideshow.
 This is written for people unfamiliar with html and css, and contains only 
 If you are comfortable with these, then this doesn’t add much that you can’t figure out from the <a href="https://revealjs.com/#/">demo</a>.
 In general, the demo is the good place to start, this guide is for those creating an academic talk and want an easy point of entry.</p>
@@ -8,22 +8,22 @@ In general, the demo is the good place to start, this guide is for those creatin
 <h2 id="installation">Installation</h2>
 
 <p>In order to use reveal.js, you need to download the source files at the <a href="https://github.com/hakimel/reveal.js/">Gihhub repository</a>.
-If you have a github account already, you can fork the repo or download the source files,a nd to get started quickly, edit the <code class="highlighter-rouge">index.html</code> file.</p>
+If you have a github account already, you can fork the repo or download the source files,a nd to get started quickly, edit the <code class="language-plaintext highlighter-rouge">index.html</code> file.</p>
 
 <h2 id="basic-elements">Basic elements</h2>
 
 <ul>
-  <li>Slides are contained within <code class="highlighter-rouge">&lt;section&gt;...&lt;/section&gt;</code> tags.</li>
-  <li><code class="highlighter-rouge">&lt;section&gt;</code> elements can be nested, in which case you create a vertical slide underneath the current one. This is useful when you have an after-point to the current slide, or you want to contain all slides underneath sections (like a paper).</li>
-  <li>Unordered lists are created with <code class="highlighter-rouge">&lt;ul&gt;...&lt;/ul&gt;</code></li>
-  <li>Ordered list are created with <code class="highlighter-rouge">&lt;ol&gt;...&lt;/ol&gt;</code></li>
-  <li>In both list types, <code class="highlighter-rouge">&lt;li&gt;...&lt;/li&gt;</code> introduce list elements.</li>
+  <li>Slides are contained within <code class="language-plaintext highlighter-rouge">&lt;section&gt;...&lt;/section&gt;</code> tags.</li>
+  <li><code class="language-plaintext highlighter-rouge">&lt;section&gt;</code> elements can be nested, in which case you create a vertical slide underneath the current one. This is useful when you have an after-point to the current slide, or you want to contain all slides underneath sections (like a paper).</li>
+  <li>Unordered lists are created with <code class="language-plaintext highlighter-rouge">&lt;ul&gt;...&lt;/ul&gt;</code></li>
+  <li>Ordered list are created with <code class="language-plaintext highlighter-rouge">&lt;ol&gt;...&lt;/ol&gt;</code></li>
+  <li>In both list types, <code class="language-plaintext highlighter-rouge">&lt;li&gt;...&lt;/li&gt;</code> introduce list elements.</li>
 </ul>
 
 <h2 id="incremental-reveal">Incremental reveal</h2>
 
 <ul>
-  <li>Incremental uncover of elements is handled by putting <code class="highlighter-rouge">class="fragment"</code> within the elements:</li>
+  <li>Incremental uncover of elements is handled by putting <code class="language-plaintext highlighter-rouge">class="fragment"</code> within the elements:</li>
 </ul>
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ul&gt;</span>
@@ -34,7 +34,7 @@ If you have a github account already, you can fork the repo or download the sour
 </code></pre></div></div>
 
 <ul>
-  <li>You can specify the order of increments by providing a <code class="highlighter-rouge">data-fragment-index</code> value:</li>
+  <li>You can specify the order of increments by providing a <code class="language-plaintext highlighter-rouge">data-fragment-index</code> value:</li>
 </ul>
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ul&gt;</span>

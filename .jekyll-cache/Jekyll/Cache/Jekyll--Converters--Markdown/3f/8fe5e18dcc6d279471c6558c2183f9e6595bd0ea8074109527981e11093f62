@@ -1,4 +1,4 @@
-I"p<p><em>So, so, many things</em>.
+I"��<p><em>So, so, many things</em>.
 But, I mean things I wish I knew from a <em>technical</em> standpoint, not just things about academia and/or life in general.
 The way I handled paper writing and research in the early days of was vastly different from how I do it now.
 If I had started off this way, it would have saved a lot of time in the long run.
@@ -76,7 +76,7 @@ All offer bibliography integration directly so you can search for citations in y
 <p>They also offer a range of syntax highlighting options and automatic indentation to make your text easier to read in the source file
 Finally, they offer the ability to define your own keybindings and snippets.
 Snippets for instance allow you to automatically insert a block of text by specifying a keyword.
-For instance, one of mine is such that typing <code class="highlighter-rouge">exe</code> and hitting <code class="highlighter-rouge">tab</code>, causes the following code to appear, with the cursor placed after <code class="highlighter-rouge">\ex </code>:</p>
+For instance, one of mine is such that typing <code class="language-plaintext highlighter-rouge">exe</code> and hitting <code class="language-plaintext highlighter-rouge">tab</code>, causes the following code to appear, with the cursor placed after <code class="language-plaintext highlighter-rouge">\ex </code>:</p>
 
 <div class="language-tex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">\begin{exe}</span>
   <span class="k">\ex</span>
@@ -84,7 +84,7 @@ For instance, one of mine is such that typing <code class="highlighter-rouge">ex
 </code></pre></div></div>
 
 <p>It’s a relatively simple one, but saves <em>a lot</em> of typing, and they can go as complex as you want.
-Another of mine, <code class="highlighter-rouge">tree</code> + <code class="highlighter-rouge">tab</code> gives:</p>
+Another of mine, <code class="language-plaintext highlighter-rouge">tree</code> + <code class="language-plaintext highlighter-rouge">tab</code> gives:</p>
 
 <div class="language-tex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">\begin{exe}</span>
   <span class="k">\ex</span>
@@ -109,7 +109,7 @@ Another of mine, <code class="highlighter-rouge">tree</code> + <code class="high
 Typing phonetic symbols in LaTeX is traditionally the domain of TIPA.
 There’s nothing inherently wrong with TIPA: it’s a good package that allows for the output of the IPA.
 What more do you need?
-The <em>problem</em> with TIPA is what it does to your source code.<sup id="fnref:TIPA"><a href="#fn:TIPA" class="footnote">1</a></sup>
+The <em>problem</em> with TIPA is what it does to your source code.<sup id="fnref:TIPA" role="doc-noteref"><a href="#fn:TIPA" class="footnote">1</a></sup>
 Writing something simple in TIPA like the pronunctiation of <em>placate</em> /pləˈkeɪt/ will need the following code:</p>
 
 <div class="language-tex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">\textipa</span><span class="p">{</span>pl@'ke1t<span class="p">}</span>
@@ -118,18 +118,18 @@ Writing something simple in TIPA like the pronunctiation of <em>placate</em> /pl
 <p>And like I said, there’s nothing inherently wrong with this.
 The problem is if you have a bunch of examples like this that you want to use elsewhere.
 Suppose that you want to put them in an email, import them into a word document, put them in webpage or work with someone like me who doesn’t use TIPA.
-You then need to manually go through the entire set of examples, manually chaning <code class="highlighter-rouge">@</code> to <code class="highlighter-rouge">ə</code>, <code class="highlighter-rouge">N</code> to <code class="highlighter-rouge">ŋ</code> and so on.</p>
+You then need to manually go through the entire set of examples, manually chaning <code class="language-plaintext highlighter-rouge">@</code> to <code class="language-plaintext highlighter-rouge">ə</code>, <code class="language-plaintext highlighter-rouge">N</code> to <code class="language-plaintext highlighter-rouge">ŋ</code> and so on.</p>
 
 <p>A better way of working, which avoids all these problems is simply to input the code directly using unicode.
 This can be tricky in the beginning but qiuckly becomes easier.
-To do this, you need a good text editor, which allows you to enter unicode characters.<sup id="fnref:unicode"><a href="#fn:unicode" class="footnote">2</a></sup>
-Emacs does this natively with the sequnce <code class="highlighter-rouge">ctrl+x 8 RET</code>.
+To do this, you need a good text editor, which allows you to enter unicode characters.<sup id="fnref:unicode" role="doc-noteref"><a href="#fn:unicode" class="footnote">2</a></sup>
+Emacs does this natively with the sequnce <code class="language-plaintext highlighter-rouge">ctrl+x 8 RET</code>.
 With both Atom and Sublime, you can download the excellent package Character Table (<a href="https://atom.io/packages/character-table">Atom</a>) (<a href="https://packagecontrol.io/packages/Character%20Table">Sublime</a>), which allows you to search by either unicode combination or by character name:</p>
 
 <p><img src="/assets/img/unicode_search.png" alt="unicode search in atom" /></p>
 
 <p>Using unicode symbols also requires you to use XeLaTeX (or at least, not pdflatex) so that the characters can be recognised.
-You also need to use a font that outputs the characters, like <a href="http://libertine-fonts.org/">Libertine</a>, or the SIL fonts like <a href="https://software.sil.org/doulos/">Doulos</a> or <a href="https://software.sil.org/charis/">Charis</a>.<sup id="fnref:fonts"><a href="#fn:fonts" class="footnote">3</a></sup></p>
+You also need to use a font that outputs the characters, like <a href="http://libertine-fonts.org/">Libertine</a>, or the SIL fonts like <a href="https://software.sil.org/doulos/">Doulos</a> or <a href="https://software.sil.org/charis/">Charis</a>.<sup id="fnref:fonts" role="doc-noteref"><a href="#fn:fonts" class="footnote">3</a></sup></p>
 
 <p>Using this method, in order to output /pləˈkeɪt/, you simply input /pləˈkeɪt/ into your document.
 And you can then copy-paste it into other formats: word documents, html documents, markdown and emails will all recognise the symbols, assuming that the font you’re using does too.
@@ -189,10 +189,10 @@ For instance, suppose that your preamble you use for everything is as follows:</
 </code></pre></div></div>
 
 <p>This is roughly what I use each time I write a document, or at least often enough that I like to have them always there.
-Instead of continually either copy-pasting this from an existing file, or, god forbid, manually typing it time after time, it’s better to save the text in a file like <code class="highlighter-rouge">packages.sty</code>, and put it in a position that TeX will look (your PATH).
-For Linux, this means in a directory <code class="highlighter-rouge">USER &gt; texmf &gt; tex &gt; latex &gt; local</code> (USER = your user account on the computer, you can normally just use <code class="highlighter-rouge">~</code> as a shorthand in place of USER, but <strong>not</strong> always).<sup id="fnref:maclibrary"><a href="#fn:maclibrary" class="footnote">4</a></sup>
+Instead of continually either copy-pasting this from an existing file, or, god forbid, manually typing it time after time, it’s better to save the text in a file like <code class="language-plaintext highlighter-rouge">packages.sty</code>, and put it in a position that TeX will look (your PATH).
+For Linux, this means in a directory <code class="language-plaintext highlighter-rouge">USER &gt; texmf &gt; tex &gt; latex &gt; local</code> (USER = your user account on the computer, you can normally just use <code class="language-plaintext highlighter-rouge">~</code> as a shorthand in place of USER, but <strong>not</strong> always).<sup id="fnref:maclibrary" role="doc-noteref"><a href="#fn:maclibrary" class="footnote">4</a></sup>
 Then any files you store there will be visible to tex.
-So, if you were to copy your usual preamble into the file <code class="highlighter-rouge">packages.sty</code>, and save it in the local directory (as just specified), then all you need is:</p>
+So, if you were to copy your usual preamble into the file <code class="language-plaintext highlighter-rouge">packages.sty</code>, and save it in the local directory (as just specified), then all you need is:</p>
 
 <div class="language-tex highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">\documentclass</span><span class="p">{</span>article<span class="p">}</span>
 <span class="k">\usepackage</span><span class="p">{</span>packages<span class="p">}</span>
@@ -203,17 +203,17 @@ So, if you were to copy your usual preamble into the file <code class="highlight
 </code></pre></div></div>
 
 <p>and TeX will use everything you specified in that file as part of your preamble to the document you’re writing.
-Just fill in anything extra you need in your preamble where <code class="highlighter-rouge">...</code> is in the above, and all your preamble is there.</p>
+Just fill in anything extra you need in your preamble where <code class="language-plaintext highlighter-rouge">...</code> is in the above, and all your preamble is there.</p>
 
 <h4 id="miscellaneous-tips">Miscellaneous tips</h4>
 
 <ul>
-  <li>Don’t type a whole paragraph in a line in the text editor. When you use synctex to sync between pdf and your editor, synctex matches the part in the pdf with the line of code in the source file. So, if that line consists of a whole paragraph, you’ve narrowed the search down to, well a paragraph. Sure, you’re in the right part of the source code, but you still need to look through that paragraph manually to find the right place. A better practice is to <strong>make each sentence its own line in the source file</strong>. Thus, when you sync to a particular place, you get taken to that sentence in the source file, and so finding the precise place is a <em>lot</em> quicker. When writing, note that hitting <code class="highlighter-rouge">enter</code> in the source file doesn’t start a new line in the output. Two sentences split over two consecutive lines is treated as part of the same paragraph. So there is no difference between:
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Here is the first sentence.
+  <li>Don’t type a whole paragraph in a line in the text editor. When you use synctex to sync between pdf and your editor, synctex matches the part in the pdf with the line of code in the source file. So, if that line consists of a whole paragraph, you’ve narrowed the search down to, well a paragraph. Sure, you’re in the right part of the source code, but you still need to look through that paragraph manually to find the right place. A better practice is to <strong>make each sentence its own line in the source file</strong>. Thus, when you sync to a particular place, you get taken to that sentence in the source file, and so finding the precise place is a <em>lot</em> quicker. When writing, note that hitting <code class="language-plaintext highlighter-rouge">enter</code> in the source file doesn’t start a new line in the output. Two sentences split over two consecutive lines is treated as part of the same paragraph. So there is no difference between:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Here is the first sentence.
 And here is the second.
 </code></pre></div>    </div>
     <p>And this:</p>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Here is the first line. And here is the second.
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Here is the first line. And here is the second.
 </code></pre></div>    </div>
   </li>
 </ul>
@@ -229,7 +229,7 @@ To put it in terms of an example, let’s imagine you write a paper and have fin
 You get a comment back saying you should change section 2, and you do.
 Then, you reread it, but don’t like what you changed, so you want to go back to the way it was.
 How?
-Yes, you can hit <code class="highlighter-rouge">command + z</code> to undo every change, but at some point, we need to recognise that this isn’t the <em>best</em> strategy.
+Yes, you can hit <code class="language-plaintext highlighter-rouge">command + z</code> to undo every change, but at some point, we need to recognise that this isn’t the <em>best</em> strategy.
 Alternatively, you can do what a lot of people I know (and myself, in a previous life) and make a new version of the paper, so you keep the old version unchanged.
 If you don’t like it, just use the old one again.
 Again, it works, but it’s not a long term solution for good file storage.
@@ -248,7 +248,7 @@ It doesn’t allow for two people to work on the same document at the same time,
 Eventually, we had to ensure that we let each other know when we were working on the file, so that no one else would try to at the same time.
 It worked, but about as well as you’d expect.</p>
 
-<p>When I got sick of this, I set up the project on <a href="https://www.overleaf.com/">Overleaf</a>, which is an online LaTeX editor that (at the time) allowed for multiple people to work on a LaTeX file at the same time online.<sup id="fnref:overleaf"><a href="#fn:overleaf" class="footnote">5</a></sup>
+<p>When I got sick of this, I set up the project on <a href="https://www.overleaf.com/">Overleaf</a>, which is an online LaTeX editor that (at the time) allowed for multiple people to work on a LaTeX file at the same time online.<sup id="fnref:overleaf" role="doc-noteref"><a href="#fn:overleaf" class="footnote">5</a></sup>
 So, whilst you don’t need to know git in order to get past the dropbox issue, I have my misgivings about Overleaf.
 Firstly, when I used it, the editor was terrible.
 It did what it needed to, but lacked the benefits I outline above about other text editors.
@@ -259,7 +259,7 @@ So, person A can work on the document, and commit their changes, while person B 
 Best of all, you don’t need to be online (like in Overleaf), but rather, you can pull the up-to-date version of the document and work offline, before pushing your changes when you connect again (great for working on trains and in cafes that lack stable wifi: hi Germany!).</p>
 
 <p>There are some downsides.
-Introduction tutorials can be daunting,<sup id="fnref:githubtutorial"><a href="#fn:githubtutorial" class="footnote">6</a></sup> but it is possible to find some to explainers, e.g. <a href="https://hackernoon.com/understanding-git-fcffd87c15a3">here</a> and collected <a href="https://medium.com/quick-code/top-tutorials-to-learn-git-for-beginners-622289ffdfe5">here</a>.
+Introduction tutorials can be daunting,<sup id="fnref:githubtutorial" role="doc-noteref"><a href="#fn:githubtutorial" class="footnote">6</a></sup> but it is possible to find some to explainers, e.g. <a href="https://hackernoon.com/understanding-git-fcffd87c15a3">here</a> and collected <a href="https://medium.com/quick-code/top-tutorials-to-learn-git-for-beginners-622289ffdfe5">here</a>.
 I used to use the one by <a href="https://github.com/jabranham">J. Alexander Branham</a>, but his website has disappeared, sadly.</p>
 
 <p>Two further things to mention.
@@ -327,25 +327,25 @@ This is a javascript based, and will produce slides in html format that you can 
 No, it’s not perfect, and you have to fiddle with it to get it right for a lingusitics talk (I’ll blog more about this soon), but the results are impressive.</p>
 
 <h2 id="notes">Notes</h2>
-<div class="footnotes">
+<div class="footnotes" role="doc-endnotes">
   <ol>
-    <li id="fn:TIPA">
-      <p>Aside from the difficulty it causes using XeLaTeX. <a href="#fnref:TIPA" class="reversefootnote">&#8617;</a></p>
+    <li id="fn:TIPA" role="doc-endnote">
+      <p>Aside from the difficulty it causes using XeLaTeX. <a href="#fnref:TIPA" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:unicode">
-      <p>Actually, that’s not really necessary. If you are using OSX, you can insert characters using the option ‘insert Emoji and Symbols’. Presumably something similar exists on windows. Alternatively, you can write unicode directly using keyboard combinations, at least on Linux. <a href="#fnref:unicode" class="reversefootnote">&#8617;</a></p>
+    <li id="fn:unicode" role="doc-endnote">
+      <p>Actually, that’s not really necessary. If you are using OSX, you can insert characters using the option ‘insert Emoji and Symbols’. Presumably something similar exists on windows. Alternatively, you can write unicode directly using keyboard combinations, at least on Linux. <a href="#fnref:unicode" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:fonts">
-      <p>This is <strong>not</strong> an exhaustive list of unicode capable fonts, just the ones that I’m familiar with. <a href="#fnref:fonts" class="reversefootnote">&#8617;</a></p>
+    <li id="fn:fonts" role="doc-endnote">
+      <p>This is <strong>not</strong> an exhaustive list of unicode capable fonts, just the ones that I’m familiar with. <a href="#fnref:fonts" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:maclibrary">
-      <p>It’s needlessly slightly more complicated on OSX. You need the file directory <code class="highlighter-rouge">USER &gt; Library &gt; texmf &gt; tex &gt; latex &gt; local</code>, and for reasons I don’t understand, Apple treats each user’s Library file as a hidden one. You can get there from the finder by following <code class="highlighter-rouge">Go &gt; Home</code> in the menu (or hit <code class="highlighter-rouge">command + shift + b</code>), which will take you to the user directory. Then, type <code class="highlighter-rouge">command + shift + .</code> to show hidden files. Make the directory <code class="highlighter-rouge">texmf &gt; tex &gt; latex &gt; local</code> there, and anything you put there should be visible to LaTeX. <a href="#fnref:maclibrary" class="reversefootnote">&#8617;</a></p>
+    <li id="fn:maclibrary" role="doc-endnote">
+      <p>It’s needlessly slightly more complicated on OSX. You need the file directory <code class="language-plaintext highlighter-rouge">USER &gt; Library &gt; texmf &gt; tex &gt; latex &gt; local</code>, and for reasons I don’t understand, Apple treats each user’s Library file as a hidden one. You can get there from the finder by following <code class="language-plaintext highlighter-rouge">Go &gt; Home</code> in the menu (or hit <code class="language-plaintext highlighter-rouge">command + shift + b</code>), which will take you to the user directory. Then, type <code class="language-plaintext highlighter-rouge">command + shift + .</code> to show hidden files. Make the directory <code class="language-plaintext highlighter-rouge">texmf &gt; tex &gt; latex &gt; local</code> there, and anything you put there should be visible to LaTeX. <a href="#fnref:maclibrary" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:overleaf">
-      <p>Overleaf is actually based on git, or was, I believe. <a href="#fnref:overleaf" class="reversefootnote">&#8617;</a></p>
+    <li id="fn:overleaf" role="doc-endnote">
+      <p>Overleaf is actually based on git, or was, I believe. <a href="#fnref:overleaf" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:githubtutorial">
-      <p>Github for instance, while a wonderful service, really needs a tutorial that doesn’t try to pack everything into one go. <a href="#fnref:githubtutorial" class="reversefootnote">&#8617;</a></p>
+    <li id="fn:githubtutorial" role="doc-endnote">
+      <p>Github for instance, while a wonderful service, really needs a tutorial that doesn’t try to pack everything into one go. <a href="#fnref:githubtutorial" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
 </div>
