@@ -278,7 +278,7 @@ done
 *Note the use of the single quotes in the query when we run the command. That's important for `grep` to correctly identify `\b`*
 
 Up until now, we've been running `sed` with the `-e` flag and previewing the results in standard output on the terminal, which serves as a useful check, but we also want to make the results in the file.
-So, as a final step, we'll add in a second run of `sed`, this time with the `-i` flad if the preview looks good.
+So, as a final step, we'll add in a second run of `sed`, this time with the `-i` flag if the preview looks good.
 What we need for this is to add a if-loop into our bash function after the run of `sed`.
 If we're happy with the result then we continue to run `sed -i`, if not, the function should abort to give us a chance to refine our query.
 We'll also map the command line input to variables to allow them to be used throughout the function, including within the if-loop:
@@ -326,8 +326,8 @@ It's important to note that this will *not* do everything for us.
 As I said before, language doesn't allow for a perfect 1:1 mapping between terms and meanings. 
 In our example files, some instances of `Second` have been picked up which should not be indexed, as in *Second to none*.
 However, if you refine the query enough, and carefully check before you implement the changes, you can write down the files and locations of the 'wrongly indexed' instances and go and manually change them. 
-This sould be easy, given that the `grep` query, with the `-nH` flag will tell you which file, and line number the example came from.
+This should be easy, given that the `grep` query, with the `-nH` flag will tell you which file, and line number the example came from.
 Because of the first step of the function, `grep` tells us that we need to go and manually change line 5 in `chapter_1.tex` and line 4 in `chapter_2.tex`.
 And that's that!
 Our bash function saves us going through the entire file by hand making the same changes time and time again.
-We still need to do some manual editing, but this way we've saved ourselves a lot of time and energy!
+We still need to do some manual editing, but if you take the time to craft the right regexes and combine them with this function, you'll save yourself a lot of time and energy!
