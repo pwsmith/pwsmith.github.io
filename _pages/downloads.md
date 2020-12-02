@@ -26,6 +26,7 @@ Below, click on the title of the paper for a pre-publication, but finished versi
 If the paper is available open-access, that link will take you to the published version.
 If the publication is *not* freely available, click the venue link to go to the published version.
 
+- [DM and Minimalism](/assets/docs/pwsmith_dm_minimalism.pdf)<br>*To appear in The Cambridge     Handbook of Distributed Morphology*
 - [Case and number suppletion in pronouns](/assets/docs/smith_et_al_case_number.pdf)<br> [Natural Language and Linguistic Theory 37(3), 1029-1101](https://link.springer.com/article/10.1007/s11049-018-9425-0), with Beata Moskal, Ting Xu, Jungmin Kang and Jonathan Bobaljik
 - [Object agreement and grammatical functions: A re-evaluation](https://langsci-press.org/catalog/view/254/2088/1777-1)<br>In Smith, Mursell and Hartmann (eds.) [*Agree to Agree: Agreement in the Minimalist Programme*](https://langsci-press.org/catalog/book/254), Language Science Press.
 - [The status of heads in morphology](/assets/docs/MoskalSmith-HeadsFinal.pdf)<br> with Beata Moskal, [Oxford Research Encyclopedias in Linguistics](https://oxfordre.com/linguistics/view/10.1093/acrefore/9780199384655.001.0001/acrefore-9780199384655-e-583)<br>
