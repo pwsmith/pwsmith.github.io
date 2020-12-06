@@ -1,0 +1,23 @@
+I"J	<p><span>Photo by <a href="https://unsplash.com/@ramonkagie?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Ramon Kagie</a> on <a href="https://unsplash.com/s/photos/st-martin?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span></p>
+
+<p>I’m happy to announce that the first version of <a href="https://github.com/pwsmith/lightref">Lightref</a> is now released and can be downloaded <a href="https://github.com/pwsmith/lightref/releases/tag/v0.1.0">here</a>.
+Lightref is a CLI that I developed for bibliography management, primarily aimed at facilitating making Bibtex bibliographies.
+Making a Bibtex bibliography is not inherently difficult, and all it really requires is a text editor, however, in order to get the formatting correct and to ensure the correct fields are entered using a reference manager makes life easier.
+For many years I used <a href="https://bibdesk.sourceforge.io/">Bibdesk</a> for this, and loved this program, but it is only available on Macs, and since switching to using Linux pretty much exclusively, this has been unavailable to me.
+I then used <a href="http://www.jabref.org/">Jabref</a>, which is an outstanding program, but I have found it to be a bit of a memory hog, and often seems overkill to open a dedicated GUI with many, many functions just to quickly add an entry to my bibliography.</p>
+
+<p>Lightref is a CLI utility that allows you to quickly add entries into your chosen bibliography, without the need to open a dedicated GUI program, or leave the terminal, if you are already writing in, say, Vim.
+It is designed to be quick and simple, and cross platform.
+To add an article to your bibliography, you simply need to open a terminal and enter:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lightref add article
+</code></pre></div></div>
+
+<p>and it will prompt you for the relevant information.
+The information is then added into your bibliography with the relevant formatting.</p>
+
+<p><img src="/images/lightref_example.png" alt="example screenshot of lightref adding an article" /></p>
+
+<p>Lightref is open source, so feel free to use it and modify it as you wish, following the terms of the Apache 2.0 license.
+If you like it, and wish to contribute to its further development, please get in touch.</p>
+:ET
