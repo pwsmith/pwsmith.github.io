@@ -6,8 +6,7 @@ permalink: /downloads/
 
 ## CV
 
-- [Full academic CV, as of August 2019](/assets/docs/smithcvfull.pdf)
-- [Resume](/assets/docs/pwsmithresume.pdf)
+- [Full academic CV, as of December 2020](/assets/docs/smithcvfull.pdf)
 
 ## Publications
 
