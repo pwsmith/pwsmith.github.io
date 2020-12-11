@@ -6,7 +6,7 @@ permalink: /downloads/
 
 ## CV
 
-- [Full academic CV, as of December 2020](/assets/docs/smithcvfull.pdf)
+- [Full academic CV, as of December 2020](/assets/docs/smith_cv.pdf)
 
 ## Publications
 
